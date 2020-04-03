@@ -3,18 +3,18 @@ DROP TABLE Requirement3;
 DROP TABLE Requirement4;
 DROP TABLE Applicant1;
 DROP TABLE Applicant3;
-DROP TABLE Applicant4;
-DROP TABLE Degree;
 DROP TABLE Intern;
 DROP TABLE Part_Time;
 DROP TABLE Full_Time;
 DROP TABLE Attended;
 DROP TABLE Job;
-DROP TABLE Platform;
 DROP TABLE Applied_For;
-DROP TABLE Application_Through_For;
-DROP TABLE Company;
 Drop TABLE School;
+DROP TABLE Application_Through_For;
+DROP TABLE Platform;
+DROP TABLE Applicant4;
+DROP TABLE Degree;
+DROP TABLE Company;
 
 CREATE TABLE Company
     (Company_Name 	CHAR(20),
@@ -48,7 +48,7 @@ CREATE TABLE Requirement3
 
 CREATE TABLE Requirement4
     (Location	CHAR(20),
-    Skills		CHAR (20),
+    Skills		CHAR (50),
     Job_number	INTEGER 	NOT NULL,
     Company_Name CHAR(20),
     Experience	CHAR(30),
@@ -108,32 +108,15 @@ CREATE TABLE Attended
     FOREIGN KEY (SIN) REFERENCES Applicant4,
     FOREIGN KEY (School_Name) REFERENCES School);
 
-CREATE TABLE Job
-	(Job_Number     INTEGER
-    Company_Name 	CHAR(25) NOT NULL,
-    Job_Title 		CHAR(15),
-    Description 		CHAR(40),
-    PRIMARY KEY (Job_Number, Company_Name),
-    FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE);
-
 CREATE TABLE Platform
 	(Platform_Name	CHAR (15),
     Type CHAR (15),
     PRIMARY KEY (Platform_Name));
 
-CREATE TABLE Applied_For
-  (SIN            INTEGER,
-  Company_Name    CHAR(25),
-  App_ID          CHAR(10),
-  PRIMARY KEY (SIN, Company_Name, App_ID),
-  FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
-  FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
-  FOREIGN KEY (App_ID) REFERENCES Application_Through_For ON DELETE CASCADE);
-
 CREATE TABLE Application_Through_For
 	(SIN			INTEGER,
     Company_Name	CHAR(25),
-    App_ID			INTEGER,
+    App_ID			CHAR(10),
     Platform_Name	CHAR(15) NOT NULL,
     Documents		CHAR(20),
     Status			CHAR(10),
@@ -141,6 +124,15 @@ CREATE TABLE Application_Through_For
     FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
     FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
     FOREIGN KEY (Platform_Name) REFERENCES Platform ON DELETE CASCADE);
+
+CREATE TABLE Applied_For
+(SIN            INTEGER,
+ Company_Name    CHAR(25),
+ App_ID          CHAR(10),
+ PRIMARY KEY (SIN, Company_Name, App_ID),
+ FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
+ FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
+ FOREIGN KEY (SIN, Company_Name, App_ID) REFERENCES Application_Through_For ON DELETE CASCADE);
 
 INSERT INTO Requirement1
 VALUES ('Vancouver BC' , 'Canada');
