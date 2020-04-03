@@ -162,4 +162,48 @@ VALUES ('Mailchimp, Wordpress, Social Media', 3.00);
 INSERT INTO Requirement3
 VALUES ('Excel, Word, Powerpoint, Outlook', 3.00);
 
+INSERT INTO Requirement4
+VALUES ('Vancouver BC', 'Adobe Creative Suite, Sketch, HTML', 1000, 'Best Buy', 2);
+
+INSERT INTO Requirement4
+VALUES ('Toronto ON', 'Accounting, Financial Modeling', 1001, 'EY', 3);
+
+INSERT INTO Requirement4
+VALUES ('Seattle WA', 'R, Statistics, Python', 1002, 'Amazon', 2);
+
+INSERT INTO Requirement4
+VALUES ('Calgary AB', 'Mailchimp, Wordpress, Social Media', 1003, 'ABC Marketing Agency', 1);
+
+INSERT INTO Requirement4
+VALUES ('Richmond BC', 'Excel, Word, Powerpoint, Outlook', 1004, 'UGO', 1);
+
+INSERT INTO Applicant1
+VALUES ('John', '3909 Harper Street', 1989-07-26);
+
+INSERT INTO Applicant1
+VALUES ('Christopher', '2359 Red Hawk Road', 1955-08-29);
+
+INSERT INTO Applicant1
+VALUES ('Nick', '3061 Park Street', 1978-01-10);
+
+INSERT INTO Applicant1
+VALUES ('Peter', '2403 Myra Street', 1991-05-23);
+
+INSERT INTO Applicant1
+VALUES ('Ivan', '492 Farm Meadow Drive', 1968-11-06);
+
+INSERT INTO Applicant3
+VALUES ('John', 'Smith', '3909 Harper Street');
+
+INSERT INTO Applicant3
+VALUES ('Christopher', 'Robins', '2359 Red Hawk Road');
+
+INSERT INTO Applicant3
+VALUES ('Nick', 'Fury', '3061 Park Street');
+
+INSERT INTO Applicant3
+VALUES ('Peter','Leibniz', '2403 Myra Street');
+
+INSERT INTO Applicant3
+VALUES ('Ivan', 'Terrible', '492 Farm Meadow Drive');
 
