@@ -355,21 +355,6 @@ VALUES ('ABC Marketing Agency', 1, 'Intern');
 INSERT INTO Company
 VALUES ('UGO', 1, 'Intern');
 
-INSERT INTO Applied_For
-VALUES (777777777, 'Best Buy', 'A1000');
-
-INSERT INTO Applied_For
-VALUES (788888888, 'EY', 'A1001');
-
-INSERT INTO Applied_For
-VALUES (977777777, 'Amazon', 'A1002');
-
-INSERT INTO Applied_For
-VALUES (999999999, 'ABC Marketing Agency', 'A1003');
-
-INSERT INTO Applied_For
-VALUES (799999999, 'UGO', 'A1004');
-
 INSERT INTO Application_Through_For
 VALUES (777777777, 'Best Buy', 'A1000', 'LinkedIn', 'Resume, Coverletter', 'Closed');
 
@@ -385,6 +370,17 @@ VALUES (999999999, 'ABC Marketing Agency', 'A1003', 'Company Website', 'Resume, 
 INSERT INTO Application_Through_For
 VALUES (799999999, 'UGO', 'A1004', 'Glassdoor', 'Resume, Coverletter', 'Accepted');
 
+INSERT INTO Application_Through_For
+VALUES (777777777, 'EY', 'A1005', 'LinkedIn', 'Resume, Coverletter', 'Interviewing');
+
+INSERT INTO Application_Through_For
+VALUES (777777777, 'Amazon', 'A1006', 'LinkedIn', 'Resume, Coverletter', 'Reviewing');
+
+INSERT INTO Application_Through_For
+VALUES (777777777, 'ABC Marketing Agency', 'A1007', 'LinkedIn', 'Resume, Coverletter', 'Closed');
+
+INSERT INTO Application_Through_For
+VALUES (777777777, 'UGO', 'A1008', 'LinkedIn', 'Resume, Coverletter', 'Accepted');
 
 
 
