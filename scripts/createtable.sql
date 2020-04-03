@@ -114,7 +114,7 @@ CREATE TABLE Platform
 CREATE TABLE Applied_For
   (SIN            INTEGER,
   Company_Name    CHAR(25),
-  App_ID          INTEGER,
+  App_ID          CHAR(10),
   PRIMARY KEY (SIN, Company_Name, App_ID),
   FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
   FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
@@ -123,7 +123,7 @@ CREATE TABLE Applied_For
 CREATE TABLE Application_Through_For
 	(SIN			INTEGER,
     Company_Name	CHAR(25),
-    App_ID			INTEGER,
+    App_ID			CHAR(10),
     Platform_Name		CHAR(15) NOT NULL,
     Documents		CHAR(20),
     Status			CHAR(10),
@@ -299,6 +299,55 @@ VALUES (999999999, 'University of Alberta');
 
 INSERT INTO Attended
 VALUES (799999999, 'University of British Columbia');
+
+INSERT INTO Job
+VALUES (1000, 'Best Buy', 'Digital Designer', 'Designs graphics for web, mobile, and print');
+
+INSERT INTO Job
+VALUES (1001, 'EY', 'Accountant', 'Prepares accounting reports, documents');
+
+INSERT INTO Job
+VALUES (1002, 'Amazon', 'Data Analyst', 'Collects and stores data, cleans and analyzes findings');
+
+INSERT INTO Job
+VALUES (1003, 'ABC Marketing Agency', 'Social Media Coordinator', 'Manage various social media platforms, blogs, and e-mail lists');
+
+INSERT INTO Job
+VALUES (1004, 'UGO', 'Account Coordinator', 'Assists with administrative tasks, creates presentations, and maintains client lists');
+
+INSERT INTO Platform
+VALUES ('LinkedIn', 'Social Media');
+
+INSERT INTO Platform
+VALUES ('Indeed', 'Job Search Website');
+
+INSERT INTO Platform
+VALUES ('Symplicity', 'Campus Recruiting');
+
+INSERT INTO Platform
+VALUES ('Company Website', 'Company Website');
+
+INSERT INTO Platform
+VALUES ('Glassdoor', 'Job Search Website');
+
+INSERT INTO Company
+VALUES ('Best Buy', 2, 'Intern');
+
+INSERT INTO Company
+VALUES ('EY', 1, 'Intern');
+
+INSERT INTO Applied_For
+VALUES (777777777, 'Best Buy', 'A1000');
+
+INSERT INTO Applied_For
+VALUES (788888888);
+
+INSERT INTO Applied_For
+VALUES (788888888);
+
+INSERT INTO Application_Through_For
+VALUES (777777777, 'Best Buy', 'A1000');
+
 
 
 
