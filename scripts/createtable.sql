@@ -146,3 +146,20 @@ VALUES ('Calgary AB' , 'Canada');
 
 INSERT INTO Requirement1
 VALUES ('Vancouver BC' , 'Canada');
+
+INSERT INTO Requirement3
+VALUES ('Adobe Creative Suite, Sketch, HTML', 3.00);
+
+INSERT INTO Requirement3
+VALUES ('Accounting, Financial Modeling', 3.20);
+
+INSERT INTO Requirement3
+VALUES ('R, Statistics, Python', 3.50);
+
+INSERT INTO Requirement3
+VALUES ('Mailchimp, Wordpress, Social Media', 3.00);
+
+INSERT INTO Requirement3
+VALUES ('Excel, Word, Powerpoint, Outlook', 3.00);
+
+
