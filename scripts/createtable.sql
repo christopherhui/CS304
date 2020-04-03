@@ -22,8 +22,8 @@ CREATE TABLE Company
      PRIMARY KEY		(Company_Name));
 
 CREATE TABLE Degree
-    (ProgramYear		INTEGER,
-     Major		CHAR(20),
+    (ProgramYear	INTEGER,
+     Major		    CHAR(20),
      Faculty		CHAR(20),
      PRIMARY KEY (ProgramYear, Major));
 
@@ -31,13 +31,13 @@ CREATE TABLE Job
     (Job_Number		INTEGER,
      Company_Name 	CHAR(25) NOT NULL,
      Job_Title 		CHAR(15),
-     Description 		CHAR(40),
+     Description 	CHAR(40),
      PRIMARY KEY (Job_Number, Company_Name),
      FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE);
 
 CREATE TABLE Requirement1
     (Location		CHAR(20),
-     Citizenship		CHAR (20),
+     Citizenship	CHAR (20),
      PRIMARY KEY 	(Location));
 
 CREATE TABLE Requirement3
@@ -70,8 +70,8 @@ CREATE TABLE Applicant3
 
 CREATE TABLE Applicant4
     (SIN		INTEGER,
-    ProgramYear		INTEGER NOT NULL,
-    Major		INTEGER NOT NULL,
+    ProgramYear	INTEGER,
+    Major		CHAR(20),
     FirstName	CHAR(20),
     Address	CHAR(30),
     PRIMARY KEY (SIN),
@@ -116,7 +116,7 @@ CREATE TABLE Application_Through_For
 	(SIN			INTEGER,
     Company_Name	CHAR(25),
     App_ID			INTEGER,
-    Platform_Name		CHAR(15) NOT NULL,
+    Platform_Name	CHAR(15) NOT NULL,
     Documents		CHAR(20),
     Status			CHAR(10),
     PRIMARY KEY (SIN, Company_Name, App_ID),
