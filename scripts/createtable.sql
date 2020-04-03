@@ -220,7 +220,7 @@ INSERT INTO Applicant4
 VALUES (999999999, 4, 'Economics','Peter', '2403 Myra Street');
 
 INSERT INTO Applicant4
-VALUES (799999999,5,'History' ,'Ivan','492 Farm Meadow Drive');
+VALUES (799999999, 5,'History' ,'Ivan','492 Farm Meadow Drive');
 
 INSERT INTO Applicant4
 VALUES (755555555, 2, 'Physics', 'Tom', '5800 Puget Drive');
@@ -336,17 +336,44 @@ VALUES ('Best Buy', 2, 'Intern');
 INSERT INTO Company
 VALUES ('EY', 1, 'Intern');
 
+INSERT INTO Company
+VALUES ('Amazon', 1, 'Intern');
+
+INSERT INTO Company
+VALUES ('ABC Marketing Agency', 1, 'Intern');
+
+INSERT INTO Company
+VALUES ('UGO', 1, 'Intern');
+
 INSERT INTO Applied_For
 VALUES (777777777, 'Best Buy', 'A1000');
 
 INSERT INTO Applied_For
-VALUES (788888888);
+VALUES (788888888, 'EY', 'A1001');
 
 INSERT INTO Applied_For
-VALUES (788888888);
+VALUES (977777777, 'Amazon', 'A1002');
+
+INSERT INTO Applied_For
+VALUES (999999999, 'ABC Marketing Agency', 'A1003');
+
+INSERT INTO Applied_For
+VALUES (799999999, 'UGO', 'A1004');
 
 INSERT INTO Application_Through_For
-VALUES (777777777, 'Best Buy', 'A1000');
+VALUES (777777777, 'Best Buy', 'A1000', 'LinkedIn', 'Resume, Coverletter', 'Closed');
+
+INSERT INTO Application_Through_For
+VALUES (788888888, 'EY', 'A1001', 'Indeed', 'Resume, Coverletter', 'Interviewing');
+
+INSERT INTO Application_Through_For
+VALUES (977777777, 'Amazon', 'A1002', 'Symplicity', 'Resume', 'Reviewing');
+
+INSERT INTO Application_Through_For
+VALUES (999999999, 'ABC Marketing Agency', 'A1003', 'Company Website', 'Resume, Coverletter', 'Closed');
+
+INSERT INTO Application_Through_For
+VALUES (799999999, 'UGO', 'A1004', 'Glassdoor', 'Resume, Coverletter', 'Accepted');
 
 
 
