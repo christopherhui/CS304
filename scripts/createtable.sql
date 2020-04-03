@@ -11,6 +11,7 @@ DROP TABLE Full_Time;
 DROP TABLE Attended;
 DROP TABLE Job;
 DROP TABLE Platform;
+DROP TABLE Applied_For;
 DROP TABLE Application_Through_For;
 
 CREATE TABLE Requirement1
@@ -37,9 +38,9 @@ CREATE TABLE Requirement4
 
 CREATE TABLE Applicant1
     (FirstName		CHAR(20),
-    Address		CHAR (30),
+    Address		    CHAR (30),
     DateOfBirth		DATE,
-    PRIMARY KEY 		(FirstName, Address));
+    PRIMARY KEY 	(FirstName, Address));
 
 CREATE TABLE Applicant3
     (FirstName	CHAR(20),
@@ -99,7 +100,7 @@ CREATE TABLE Attended
     FOREIGN KEY (School_Name) REFERENCES School);
 
 CREATE TABLE Job
-	(Job_Number		INTEGER,
+	(Job_Number     INTEGER
     Company_Name 	CHAR(25) NOT NULL,
     Job_Title 		CHAR(15),
     Description 		CHAR(40),
@@ -108,8 +109,17 @@ CREATE TABLE Job
 
 CREATE TABLE Platform
 	(Platform_Name	CHAR (15),
-	Type			CHAR (15),
+    Type CHAR (15),
     PRIMARY KEY (Platform_Name));
+
+CREATE TABLE Applied_For
+  (SIN            INTEGER,
+  Company_Name    CHAR(25),
+  App_ID          INTEGER,
+  PRIMARY KEY (SIN, Company_Name, App_ID),
+  FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
+  FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
+  FOREIGN KEY (App_ID) REFERENCES Application_Through_For ON DELETE CASCADE);
 
 CREATE TABLE Application_Through_For
 	(SIN			INTEGER,
