@@ -108,7 +108,7 @@ CREATE TABLE Attended
     FOREIGN KEY (School_Name) REFERENCES School);
 
 CREATE TABLE Job
-	(Job_Number     INTEGER
+	(Job_Number     INTEGER,
     Company_Name 	CHAR(25) NOT NULL,
     Job_Title 		CHAR(15),
     Description 		CHAR(40),
