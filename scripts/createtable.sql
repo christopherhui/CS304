@@ -13,16 +13,38 @@ DROP TABLE Job;
 DROP TABLE Platform;
 DROP TABLE Applied_For;
 DROP TABLE Application_Through_For;
+DROP TABLE Company;
+Drop TABLE School;
+
+CREATE TABLE Company
+    (Company_Name 	CHAR(20),
+     HiringAmt		INTEGER,
+     Type			CHAR(20),
+     PRIMARY KEY		(Company_Name));
+
+CREATE TABLE Degree
+    (ProgramYear	INTEGER,
+     Major		    CHAR(20),
+     Faculty		CHAR(20),
+     PRIMARY KEY (ProgramYear, Major));
+
+CREATE TABLE Job
+    (Job_Number		INTEGER,
+     Company_Name 	CHAR(25) NOT NULL,
+     Job_Title 		CHAR(15),
+     Description 	CHAR(40),
+     PRIMARY KEY (Job_Number, Company_Name),
+     FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE);
 
 CREATE TABLE Requirement1
     (Location		CHAR(20),
-    Citizenship		CHAR (20),
-    PRIMARY KEY 	(Location));
+     Citizenship	CHAR (20),
+     PRIMARY KEY 	(Location));
 
 CREATE TABLE Requirement3
     (Skills		CHAR(100),
-    GPA		REAL,
-    PRIMARY KEY 	(Skills));
+     GPA		REAL,
+     PRIMARY KEY 	(Skills));
 
 CREATE TABLE Requirement4
     (Location	CHAR(20),
@@ -49,24 +71,12 @@ CREATE TABLE Applicant3
 
 CREATE TABLE Applicant4
     (SIN		INTEGER,
-    Year		INTEGER NOT NULL,
-    Major		INTEGER NOT NULL,
+    ProgramYear	INTEGER,
+    Major		CHAR(20),
     FirstName	CHAR(20),
     Address	CHAR(30),
     PRIMARY KEY (SIN),
-    FOREIGN KEY (Year, Major) REFERENCES Degree ON DELETE CASCADE);
-
-CREATE TABLE Company
-	(Company_Name 	CHAR(20),
-    HiringAmt		INTEGER,
-    Type			CHAR(20),
-    PRIMARY KEY		(Company_Name));
-
-CREATE TABLE Degree
-    (Year		INTEGER,
-    Major		CHAR(20),
-    Faculty		CHAR(20),
-    PRIMARY KEY (Year, Major));
+    FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
 
 CREATE TABLE Intern
     (SIN			INTEGER,
@@ -82,7 +92,7 @@ CREATE TABLE Part_Time
 
 CREATE TABLE Full_Time
     (SIN			INTEGER,
-    Years_Worked		INTEGER,
+    Years_Worked	INTEGER,
     PRIMARY KEY (SIN),
     FOREIGN KEY (SIN) REFERENCES Applicant4);
 
@@ -123,8 +133,8 @@ CREATE TABLE Applied_For
 CREATE TABLE Application_Through_For
 	(SIN			INTEGER,
     Company_Name	CHAR(25),
-    App_ID			CHAR(10),
-    Platform_Name		CHAR(15) NOT NULL,
+    App_ID			INTEGER,
+    Platform_Name	CHAR(15) NOT NULL,
     Documents		CHAR(20),
     Status			CHAR(10),
     PRIMARY KEY (SIN, Company_Name, App_ID),
