@@ -207,3 +207,33 @@ VALUES ('Peter','Leibniz', '2403 Myra Street');
 INSERT INTO Applicant3
 VALUES ('Ivan', 'Terrible', '492 Farm Meadow Drive');
 
+INSERT INTO Applicant4
+VALUES (777777777, 3, 'Psychology', 'John','3909 Harper Street');
+
+INSERT INTO Applicant4
+VALUES (788888888, 3, 'Computer Science','Christopher','2359 Red Hawk Road');
+
+INSERT INTO Applicant4
+VALUES (977777777, 3, 'Business','Nick', '3061 Park Street');
+
+INSERT INTO Applicant4
+VALUES (999999999, 4, 'Economics','Peter', '2403 Myra Street');
+
+INSERT INTO Applicant4
+VALUES (799999999,5,'History' ,'Ivan','492 Farm Meadow Drive');
+
+INSERT INTO Degree
+VALUES (3, 'Psychology','Arts');
+
+INSERT INTO Degree
+VALUES (3, 'Computer Science','Science');
+
+INSERT INTO Degree
+VALUES (3, 'Business','Commerce');
+
+INSERT INTO Degree
+VALUES (4, 'Economics','Arts');
+
+INSERT INTO Degree
+VALUES (5,'History','Arts');
+
