@@ -222,6 +222,21 @@ VALUES (999999999, 4, 'Economics','Peter', '2403 Myra Street');
 INSERT INTO Applicant4
 VALUES (799999999,5,'History' ,'Ivan','492 Farm Meadow Drive');
 
+INSERT INTO Applicant4
+VALUES (755555555, 2, 'Physics', 'Tom', '5800 Puget Drive');
+
+INSERT INTO Applicant4
+VALUES (780808080, 4, 'Finance', 'Josh', '6561 Cambie Street');
+
+INSERT INTO Applicant4
+VALUES (943434343, 3, 'Accounting', 'Jack', '3455 Agronomy Rd');
+
+INSERT INTO Applicant4
+VALUES (722222222, 3, 'Medicine', 'Jane', '5981 Davie Drive');
+
+INSERT INTO Applicant4
+VALUES (965748374, 3, 'Nutrition', 'Amanda', '7999 Penguin Drive');
+
 INSERT INTO Degree
 VALUES (3, 'Psychology','Arts');
 
@@ -236,4 +251,55 @@ VALUES (4, 'Economics','Arts');
 
 INSERT INTO Degree
 VALUES (5,'History','Arts');
+
+INSERT INTO Intern
+VALUES (777777777, 1);
+
+INSERT INTO Intern
+VALUES (788888888, 2);
+
+INSERT INTO Intern
+VALUES (977777777, 1);
+
+INSERT INTO Intern
+VALUES (755555555, 1);
+
+INSERT INTO Intern
+VALUES (999999999, 2);
+
+INSERT INTO Part_Time
+VALUES(999999999, 40);
+
+INSERT INTO Part_Time
+VALUES(799999999, 40);
+
+INSERT INTO Part_Time
+VALUES(780808080, 40);
+
+INSERT INTO Part_Time
+VALUES(943434343, 40);
+
+INSERT INTO Full_Time
+VALUES(722222222, 0);
+
+INSERT INTO Full_Time
+VALUES(965748374, 0);
+
+INSERT INTO Attended
+VALUES (777777777, 'University of British Columbia');
+
+INSERT INTO Attended
+VALUES (788888888, 'University of Toronto');
+
+INSERT INTO Attended
+VALUES (977777777, 'University of Washington');
+
+INSERT INTO Attended
+VALUES (999999999, 'University of Alberta');
+
+INSERT INTO Attended
+VALUES (799999999, 'University of British Columbia');
+
+
+
 
