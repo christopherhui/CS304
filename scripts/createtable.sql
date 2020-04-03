@@ -11,7 +11,6 @@ DROP TABLE Full_Time;
 DROP TABLE Attended;
 DROP TABLE Job;
 DROP TABLE Platform;
-DROP TABLE Applied_For;
 DROP TABLE Application_Through_For;
 DROP TABLE Company;
 Drop TABLE School;
