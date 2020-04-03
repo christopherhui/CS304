@@ -15,8 +15,8 @@ DROP TABLE Applied_For;
 DROP TABLE Application_Through_For;
 
 CREATE TABLE Requirement1
-    (Location		CHAR(20)
-    Citizenship		CHAR (20)
+    (Location		CHAR(20),
+    Citizenship		CHAR (20),
     PRIMARY KEY 	(Location));
 
 CREATE TABLE Requirement3
@@ -145,7 +145,7 @@ INSERT INTO Requirement1
 VALUES ('Calgary AB' , 'Canada');
 
 INSERT INTO Requirement1
-VALUES ('Vancouver BC' , 'Canada');
+VALUES ('Richmond BC' , 'Canada');
 
 INSERT INTO Requirement3
 VALUES ('Adobe Creative Suite, Sketch, HTML', 3.00);
