@@ -15,10 +15,9 @@ DROP TABLE Applied_For;
 DROP TABLE Application_Through_For;
 
 CREATE TABLE Requirement1
-    (Location		CHAR(20),
-    Citizenship		CHAR (20),
-    PRIMARY KEY 	(Location)
-    );
+    (Location		CHAR(20)
+    Citizenship		CHAR (20)
+    PRIMARY KEY 	(Location));
 
 CREATE TABLE Requirement3
     (Skills		CHAR(100),
@@ -132,3 +131,18 @@ CREATE TABLE Application_Through_For
     FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
     FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
     FOREIGN KEY (Platform_Name) REFERENCES Platform ON DELETE CASCADE);
+
+INSERT INTO Requirement1
+VALUES ('Vancouver BC' , 'Canada');
+
+INSERT INTO Requirement1
+VALUES ('Toronto ON' , 'Canada');
+
+INSERT INTO Requirement1
+VALUES ('Seattle WA' , 'United States');
+
+INSERT INTO Requirement1
+VALUES ('Calgary AB' , 'Canada');
+
+INSERT INTO Requirement1
+VALUES ('Vancouver BC' , 'Canada');
