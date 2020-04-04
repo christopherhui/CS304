@@ -1,8 +1,6 @@
 package ca.ubc.cs304.model;
 
 
-import java.sql.Date;
-
 public class Applicant {
     // All values in the table should not be null, as they have references to other tables
     private final int sin;
@@ -11,9 +9,9 @@ public class Applicant {
     private final String firstName;
     private final String lastName;
     private final String address;
-    private final Date doe;
+    private final int doe;
 
-    public Applicant(int sin, int year, String major, String firstName, String lastName, String address, Date doe) {
+    public Applicant(int sin, int year, String major, String firstName, String lastName, String address, int doe) {
         this.sin = sin;
         this.doe = doe;
         this.year = Degree.getYear();
@@ -45,7 +43,7 @@ public class Applicant {
         return address;
     }
 
-    public Date getDoe() {
+    public int getDoe() {
         return doe;
     }
 }
