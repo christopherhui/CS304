@@ -16,114 +16,114 @@ DROP TABLE Degree;
 DROP TABLE Company;
 
 CREATE TABLE Company
-    (Company_Name 	CHAR(25),
-     HiringAmt		INTEGER,
-     Type			CHAR(20),
-     PRIMARY KEY		(Company_Name));
+(Company_Name 	CHAR(25),
+ HiringAmt		INTEGER,
+ Type			CHAR(20),
+ PRIMARY KEY		(Company_Name));
 
 CREATE TABLE Degree
-    (ProgramYear	INTEGER,
-     Major		    CHAR(20),
-     Faculty		CHAR(20),
-     PRIMARY KEY (ProgramYear, Major));
+(ProgramYear	INTEGER,
+ Major		    CHAR(20),
+ Faculty		CHAR(20),
+ PRIMARY KEY (ProgramYear, Major));
 
 CREATE TABLE Job
-    (Job_Number		INTEGER,
-     Company_Name 	CHAR(25) NOT NULL,
-     Job_Title 		CHAR(100),
-     Description 	CHAR(100),
-     PRIMARY KEY (Job_Number, Company_Name),
-     FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE);
+(Job_Number		INTEGER,
+ Company_Name 	CHAR(25) NOT NULL,
+ Job_Title 		CHAR(100),
+ Description 	CHAR(100),
+ PRIMARY KEY (Job_Number, Company_Name),
+ FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE);
 
 CREATE TABLE Requirement1
-    (Location		CHAR(20),
-     Citizenship	CHAR (20),
-     PRIMARY KEY 	(Location));
+(Location		CHAR(20),
+ Citizenship	CHAR (20),
+ PRIMARY KEY 	(Location));
 
 CREATE TABLE Requirement3
-    (Skills		CHAR(100),
-     GPA		REAL,
-     PRIMARY KEY 	(Skills));
+(Skills		CHAR(100),
+ GPA		REAL,
+ PRIMARY KEY 	(Skills));
 
 CREATE TABLE Requirement4
-    (Location	CHAR(20),
-    Skills		CHAR (50),
-    Job_Number	INTEGER NOT NULL,
-    Company_Name CHAR(25),
-    Experience	CHAR(30),
-    PRIMARY KEY 	(Location, Skills),
-    FOREIGN KEY (Job_Number, Company_Name)
-    REFERENCES Job ON DELETE CASCADE,
-    UNIQUE 	(Job_Number, Company_Name));
+(Location	CHAR(20),
+ Skills		CHAR (50),
+ Job_Number	INTEGER NOT NULL,
+ Company_Name CHAR(25),
+ Experience	CHAR(30),
+ PRIMARY KEY 	(Location, Skills),
+ FOREIGN KEY (Job_Number, Company_Name)
+     REFERENCES Job ON DELETE CASCADE,
+ UNIQUE 	(Job_Number, Company_Name));
 
 CREATE TABLE Applicant1
-    (FirstName		CHAR(20),
-    Address		    CHAR (30),
-    DateOfBirth		DATE,
-    PRIMARY KEY 	(FirstName, Address));
+(FirstName		CHAR(20),
+ Address		    CHAR (30),
+ DateOfBirth		NUMBER,
+ PRIMARY KEY 	(FirstName, Address));
 
 CREATE TABLE Applicant3
-    (FirstName	CHAR(20),
-    LastName	CHAR(20),
-    Address	CHAR(30),
-    PRIMARY KEY (FirstName, LastName));
+(FirstName	CHAR(20),
+ LastName	CHAR(20),
+ Address	CHAR(30),
+ PRIMARY KEY (FirstName, LastName));
 
 CREATE TABLE Applicant4
-    (SIN		INTEGER,
-    ProgramYear	INTEGER,
-    Major		CHAR(20),
-    FirstName	CHAR(20),
-    LastName    CHAR(20),
-    Address	CHAR(30),
-    PRIMARY KEY (SIN),
-    FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
+(SIN		INTEGER,
+ ProgramYear	INTEGER,
+ Major		CHAR(20),
+ FirstName	CHAR(20),
+ LastName    CHAR(20),
+ Address	CHAR(30),
+ PRIMARY KEY (SIN),
+ FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
 
 CREATE TABLE Intern
-    (SIN			INTEGER,
-    Number_Of_Terms	INTEGER,
-    PRIMARY KEY (SIN),
-    FOREIGN KEY (SIN) REFERENCES Applicant4);
+(SIN			INTEGER,
+ Number_Of_Terms	INTEGER,
+ PRIMARY KEY (SIN),
+ FOREIGN KEY (SIN) REFERENCES Applicant4);
 
 CREATE TABLE Part_Time
-    (SIN			INTEGER,
-    Hours_Per_Week	INTEGER,
-    PRIMARY KEY (SIN),
-    FOREIGN KEY (SIN) REFERENCES Applicant4);
+(SIN			INTEGER,
+ Hours_Per_Week	INTEGER,
+ PRIMARY KEY (SIN),
+ FOREIGN KEY (SIN) REFERENCES Applicant4);
 
 CREATE TABLE Full_Time
-    (SIN			INTEGER,
-    Years_Worked	INTEGER,
-    PRIMARY KEY (SIN),
-    FOREIGN KEY (SIN) REFERENCES Applicant4);
+(SIN			INTEGER,
+ Years_Worked	INTEGER,
+ PRIMARY KEY (SIN),
+ FOREIGN KEY (SIN) REFERENCES Applicant4);
 
 CREATE TABLE School
-    (School_Name	CHAR(20),
-     Location	CHAR(20),
-        PRIMARY KEY (School_Name));
+(School_Name	CHAR(40),
+ Location	CHAR(20),
+ PRIMARY KEY (School_Name));
 
 CREATE TABLE Attended
-    (SIN			INTEGER,
-    School_Name		CHAR(20),
-    PRIMARY KEY (SIN, School_Name),
-    FOREIGN KEY (SIN) REFERENCES Applicant4,
-    FOREIGN KEY (School_Name) REFERENCES School);
+(SIN			INTEGER,
+ School_Name		CHAR(40),
+ PRIMARY KEY (SIN, School_Name),
+ FOREIGN KEY (SIN) REFERENCES Applicant4,
+ FOREIGN KEY (School_Name) REFERENCES School);
 
 CREATE TABLE Platform
-	(Platform_Name	CHAR (15),
-    Type CHAR (15),
-    PRIMARY KEY (Platform_Name));
+(Platform_Name	CHAR (30),
+ Type CHAR (20),
+ PRIMARY KEY (Platform_Name));
 
 CREATE TABLE Application_Through_For
-	(SIN			INTEGER,
-    Company_Name	CHAR(25),
-    App_ID			CHAR(10),
-    Platform_Name	CHAR(15) NOT NULL,
-    Documents		CHAR(20),
-    Status			CHAR(10),
-    PRIMARY KEY (SIN, Company_Name, App_ID),
-    FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
-    FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
-    FOREIGN KEY (Platform_Name) REFERENCES Platform ON DELETE CASCADE);
+(SIN			INTEGER,
+ Company_Name	CHAR(25),
+ App_ID			CHAR(10),
+ Platform_Name	CHAR(30) NOT NULL,
+ Documents		CHAR(20),
+ Status			CHAR(20),
+ PRIMARY KEY (SIN, Company_Name, App_ID),
+ FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
+ FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
+ FOREIGN KEY (Platform_Name) REFERENCES Platform ON DELETE CASCADE);
 
 INSERT INTO Company
 VALUES ('Best Buy', 2, 'Intern');
@@ -230,36 +230,6 @@ VALUES ('Peter','Leibniz', '2403 Myra Street');
 INSERT INTO Applicant3
 VALUES ('Ivan', 'Terrible', '492 Farm Meadow Drive');
 
-INSERT INTO Applicant4
-VALUES (777777777, 3, 'Psychology', 'John','Smith','3909 Harper Street');
-
-INSERT INTO Applicant4
-VALUES (788888888, 3, 'Computer Science','Christopher', 'Robins', '2359 Red Hawk Road');
-
-INSERT INTO Applicant4
-VALUES (977777777, 3, 'Business','Nick', 'Fury', '3061 Park Street');
-
-INSERT INTO Applicant4
-VALUES (999999999, 4, 'Economics','Peter', 'Leibniz', '2403 Myra Street');
-
-INSERT INTO Applicant4
-VALUES (799999999, 5,'History' ,'Ivan', 'Terrible', '492 Farm Meadow Drive');
-
-INSERT INTO Applicant4
-VALUES (755555555, 2, 'Physics', 'Tom', 'Cruise', '5800 Puget Drive');
-
-INSERT INTO Applicant4
-VALUES (780808080, 4, 'Finance', 'Josh', 'Kim', '6561 Cambie Street');
-
-INSERT INTO Applicant4
-VALUES (943434343, 3, 'Accounting', 'Jack', 'Lee', '3455 Agronomy Rd');
-
-INSERT INTO Applicant4
-VALUES (722222222, 3, 'Medicine', 'Jane', 'Eyre', '5981 Davie Drive');
-
-INSERT INTO Applicant4
-VALUES (965748374, 3, 'Nutrition', 'Amanda', '7999 Penguin Drive');
-
 INSERT INTO Degree
 VALUES (3, 'Psychology','Arts');
 
@@ -274,6 +244,42 @@ VALUES (4, 'Economics','Arts');
 
 INSERT INTO Degree
 VALUES (5,'History','Arts');
+
+INSERT INTO Degree
+VALUES (2,'Physics','Science');
+
+INSERT INTO Degree
+VALUES (4,'Finance','Commerce');
+
+INSERT INTO Applicant4
+VALUES (777777777, 3, 'Psychology', 'John','Smith','3909 Harper Street');
+
+INSERT INTO Applicant4
+VALUES (788888888, 3, 'Computer Science','Christopher', 'Robins', '2359 Red Hawk Road');
+
+INSERT INTO Applicant4
+VALUES (977777777, 3, 'Business','Nick', 'Fury', '3061 Park Street');
+--
+INSERT INTO Applicant4
+VALUES (999999999, 4, 'Economics','Peter', 'Leibniz', '2403 Myra Street');
+
+INSERT INTO Applicant4
+VALUES (799999999, 5,'History' ,'Ivan', 'Terrible', '492 Farm Meadow Drive');
+
+INSERT INTO Applicant4
+VALUES (755555555, 2, 'Physics', 'Tom', 'Cruise', '5800 Puget Drive');
+
+INSERT INTO Applicant4
+VALUES (780808080, 4, 'Finance', 'Josh', 'Kim', '6561 Cambie Street');
+
+INSERT INTO Applicant4
+VALUES (943434343, 3, 'Computer Science', 'Jack', 'Lee', '3455 Agronomy Rd');
+
+INSERT INTO Applicant4
+VALUES (722222222, 3, 'Computer Science', 'Jane', 'Eyre', '5981 Davie Drive');
+
+INSERT INTO Applicant4
+VALUES (965748374, 3, 'Computer Science', 'Amanda', 'Summer', '7999 Penguin Drive');
 
 INSERT INTO Intern
 VALUES (777777777, 1);
@@ -307,6 +313,18 @@ VALUES(722222222, 0);
 
 INSERT INTO Full_Time
 VALUES(965748374, 0);
+
+INSERT INTO School
+VALUES('University of British Columbia', 'Vancouver');
+
+INSERT INTO School
+VALUES('University of Toronto', 'Toronto');
+
+INSERT INTO School
+VALUES('University of Washington', 'Seattle');
+
+INSERT INTO School
+VALUES('University of Alberta', 'Edmonton');
 
 INSERT INTO Attended
 VALUES (777777777, 'University of British Columbia');
