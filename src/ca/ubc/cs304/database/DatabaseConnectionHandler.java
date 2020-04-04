@@ -39,9 +39,9 @@ public class DatabaseConnectionHandler {
 	public void deleteApplicant(int sin) {
 		ArrayList<Applicant> result = new ArrayList<Applicant>();
 		try {
-			// con is a Connection object
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM APPLICANT4 a4 WHERE a4.SIN = ?");
+			PreparedStatement ps4 = connection.prepareStatement("SELECT * FROM APPLICANT4 a4, APPLICANT3 a3 WHERE a4.SIN = ? AND a4.FIRSTNAME = a3.FIRSTNAME");
+			ps4.setInt(1, sin);
+			ResultSet rs = ps4.executeQuery();
 
 			while(rs.next()) {
 				Applicant model = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"),
@@ -49,28 +49,29 @@ public class DatabaseConnectionHandler {
 				result.add(model);
 			}
 
-			rs.close();
-			stmt.close();
+			PreparedStatement ps1 = connection.prepareStatement("DELETE FROM APPLICANT1 a1 WHERE a1.FIRSTNAME = ? AND a1.ADDRESS = ?");
+			PreparedStatement ps3 = connection.prepareStatement("DELETE FROM APPLICANT3 a3 WHERE a3.FIRSTNAME = ? AND a3.LASTNAME = ?");
+			ps4 = connection.prepareStatement("DELETE FROM APPLICANT4 a4 WHERE a4.SIN = ?");
+			for (Applicant a : result) {
+				// Set values of each query
+				ps1.setString(1, a.getFirstName());
+				ps1.setString(2, a.getAddress());
+				ps3.setString(1, a.getFirstName());
+				ps3.setString(2, a.getLastName());
+				ps4.setInt(1, a.getSin());
 
-		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-			rollbackConnection();
-		}
-	}
-
-	public void deleteBranch(int branchId) {
-		try {
-			PreparedStatement ps = connection.prepareStatement("DELETE FROM branch WHERE branch_id = ?");
-			ps.setInt(1, branchId);
-			
-			int rowCount = ps.executeUpdate();
-			if (rowCount == 0) {
-				System.out.println(WARNING_TAG + " Branch " + branchId + " does not exist!");
+				// Execute such updates
+				ps1.executeUpdate();
+				ps3.executeUpdate();
+				ps4.executeUpdate();
 			}
-			
-			connection.commit();
-	
-			ps.close();
+
+			// Close connections
+			rs.close();
+			ps1.close();
+			ps3.close();
+			ps4.close();
+
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 			rollbackConnection();
