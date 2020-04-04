@@ -16,7 +16,7 @@ DROP TABLE Degree;
 DROP TABLE Company;
 
 CREATE TABLE Company
-    (Company_Name 	CHAR(20),
+    (Company_Name 	CHAR(25),
      HiringAmt		INTEGER,
      Type			CHAR(20),
      PRIMARY KEY		(Company_Name));
@@ -30,8 +30,8 @@ CREATE TABLE Degree
 CREATE TABLE Job
     (Job_Number		INTEGER,
      Company_Name 	CHAR(25) NOT NULL,
-     Job_Title 		CHAR(20),
-     Description 	CHAR(60),
+     Job_Title 		CHAR(100),
+     Description 	CHAR(100),
      PRIMARY KEY (Job_Number, Company_Name),
      FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE);
 
@@ -48,7 +48,7 @@ CREATE TABLE Requirement3
 CREATE TABLE Requirement4
     (Location	CHAR(20),
     Skills		CHAR (50),
-    Job_number	INTEGER 	NOT NULL,
+    Job_number	INTEGER NOT NULL,
     Company_Name CHAR(20),
     Experience	CHAR(30),
     PRIMARY KEY 	(Location, Skills),
