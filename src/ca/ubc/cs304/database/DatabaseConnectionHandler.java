@@ -39,13 +39,13 @@ public class DatabaseConnectionHandler {
 	public void deleteApplicant(int sin) {
 		ArrayList<Applicant> result = new ArrayList<Applicant>();
 		try {
-			PreparedStatement ps4 = connection.prepareStatement("SELECT * FROM APPLICANT4 a4, APPLICANT3 a3 WHERE a4.SIN = ? AND a4.FIRSTNAME = a3.FIRSTNAME");
+			PreparedStatement ps4 = connection.prepareStatement("SELECT * FROM APPLICANT4 a4, APPLICANT3 a3, APPLICANT1 a1 WHERE a4.SIN = ? AND a4.FIRSTNAME = a3.FIRSTNAME AND a1.ADDRESS = a4.ADDRESS");
 			ps4.setInt(1, sin);
 			ResultSet rs = ps4.executeQuery();
 
 			while(rs.next()) {
 				Applicant model = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"),
-						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), doe);
+						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getDate("DateOfBirth"));
 				result.add(model);
 			}
 
