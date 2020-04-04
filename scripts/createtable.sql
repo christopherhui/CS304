@@ -3,14 +3,11 @@ DROP TABLE Requirement3;
 DROP TABLE Requirement4;
 DROP TABLE Applicant1;
 DROP TABLE Applicant3;
-DROP TABLE Applicant4;
-DROP TABLE Degree;
 DROP TABLE Intern;
 DROP TABLE Part_Time;
 DROP TABLE Full_Time;
 DROP TABLE Attended;
 DROP TABLE Job;
-DROP TABLE Applied_For;
 Drop TABLE School;
 DROP TABLE Application_Through_For;
 DROP TABLE Platform;
@@ -33,8 +30,8 @@ CREATE TABLE Degree
 CREATE TABLE Job
     (Job_Number		INTEGER,
      Company_Name 	CHAR(25) NOT NULL,
-     Job_Title 		CHAR(15),
-     Description 	CHAR(40),
+     Job_Title 		CHAR(20),
+     Description 	CHAR(60),
      PRIMARY KEY (Job_Number, Company_Name),
      FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE);
 
@@ -126,6 +123,36 @@ CREATE TABLE Application_Through_For
     FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
     FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
     FOREIGN KEY (Platform_Name) REFERENCES Platform ON DELETE CASCADE);
+
+INSERT INTO Company
+VALUES ('Best Buy', 2, 'Intern');
+
+INSERT INTO Company
+VALUES ('EY', 1, 'Intern');
+
+INSERT INTO Company
+VALUES ('Amazon', 1, 'Intern');
+
+INSERT INTO Company
+VALUES ('ABC Marketing Agency', 1, 'Intern');
+
+INSERT INTO Company
+VALUES ('UGO', 1, 'Intern');
+
+INSERT INTO Job
+VALUES (1000, 'Best Buy', 'Digital Designer', 'Designs graphics for web, mobile, and print');
+
+INSERT INTO Job
+VALUES (1001, 'EY', 'Accountant', 'Prepares accounting reports, documents');
+
+INSERT INTO Job
+VALUES (1002, 'Amazon', 'Data Analyst', 'Collects and stores data, cleans and analyzes findings');
+
+INSERT INTO Job
+VALUES (1003, 'ABC Marketing Agency', 'Social Media Coordinator', 'Manage various social media platforms, blogs, and e-mail lists');
+
+INSERT INTO Job
+VALUES (1004, 'UGO', 'Account Coordinator', 'Assists with administrative tasks, creates presentations, and maintains client lists');
 
 INSERT INTO Requirement1
 VALUES ('Vancouver BC' , 'Canada');
@@ -295,21 +322,6 @@ VALUES (999999999, 'University of Alberta');
 INSERT INTO Attended
 VALUES (799999999, 'University of British Columbia');
 
-INSERT INTO Job
-VALUES (1000, 'Best Buy', 'Digital Designer', 'Designs graphics for web, mobile, and print');
-
-INSERT INTO Job
-VALUES (1001, 'EY', 'Accountant', 'Prepares accounting reports, documents');
-
-INSERT INTO Job
-VALUES (1002, 'Amazon', 'Data Analyst', 'Collects and stores data, cleans and analyzes findings');
-
-INSERT INTO Job
-VALUES (1003, 'ABC Marketing Agency', 'Social Media Coordinator', 'Manage various social media platforms, blogs, and e-mail lists');
-
-INSERT INTO Job
-VALUES (1004, 'UGO', 'Account Coordinator', 'Assists with administrative tasks, creates presentations, and maintains client lists');
-
 INSERT INTO Platform
 VALUES ('LinkedIn', 'Social Media');
 
@@ -324,21 +336,6 @@ VALUES ('Company Website', 'Company Website');
 
 INSERT INTO Platform
 VALUES ('Glassdoor', 'Job Search Website');
-
-INSERT INTO Company
-VALUES ('Best Buy', 2, 'Intern');
-
-INSERT INTO Company
-VALUES ('EY', 1, 'Intern');
-
-INSERT INTO Company
-VALUES ('Amazon', 1, 'Intern');
-
-INSERT INTO Company
-VALUES ('ABC Marketing Agency', 1, 'Intern');
-
-INSERT INTO Company
-VALUES ('UGO', 1, 'Intern');
 
 INSERT INTO Application_Through_For
 VALUES (777777777, 'Best Buy', 'A1000', 'LinkedIn', 'Resume, Coverletter', 'Closed');
