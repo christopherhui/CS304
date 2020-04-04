@@ -48,8 +48,8 @@ CREATE TABLE Requirement3
 CREATE TABLE Requirement4
     (Location	CHAR(20),
     Skills		CHAR (50),
-    Job_number	INTEGER NOT NULL,
-    Company_Name CHAR(20),
+    Job_Number	INTEGER NOT NULL,
+    Company_Name CHAR(25),
     Experience	CHAR(30),
     PRIMARY KEY 	(Location, Skills),
     FOREIGN KEY (Job_Number, Company_Name)
@@ -73,6 +73,7 @@ CREATE TABLE Applicant4
     ProgramYear	INTEGER,
     Major		CHAR(20),
     FirstName	CHAR(20),
+    LastName    CHAR(20),
     Address	CHAR(30),
     PRIMARY KEY (SIN),
     FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
@@ -230,31 +231,31 @@ INSERT INTO Applicant3
 VALUES ('Ivan', 'Terrible', '492 Farm Meadow Drive');
 
 INSERT INTO Applicant4
-VALUES (777777777, 3, 'Psychology', 'John','3909 Harper Street');
+VALUES (777777777, 3, 'Psychology', 'John','Smith','3909 Harper Street');
 
 INSERT INTO Applicant4
-VALUES (788888888, 3, 'Computer Science','Christopher','2359 Red Hawk Road');
+VALUES (788888888, 3, 'Computer Science','Christopher', 'Robins', '2359 Red Hawk Road');
 
 INSERT INTO Applicant4
-VALUES (977777777, 3, 'Business','Nick', '3061 Park Street');
+VALUES (977777777, 3, 'Business','Nick', 'Fury', '3061 Park Street');
 
 INSERT INTO Applicant4
-VALUES (999999999, 4, 'Economics','Peter', '2403 Myra Street');
+VALUES (999999999, 4, 'Economics','Peter', 'Leibniz', '2403 Myra Street');
 
 INSERT INTO Applicant4
-VALUES (799999999, 5,'History' ,'Ivan','492 Farm Meadow Drive');
+VALUES (799999999, 5,'History' ,'Ivan', 'Terrible', '492 Farm Meadow Drive');
 
 INSERT INTO Applicant4
-VALUES (755555555, 2, 'Physics', 'Tom', '5800 Puget Drive');
+VALUES (755555555, 2, 'Physics', 'Tom', 'Cruise', '5800 Puget Drive');
 
 INSERT INTO Applicant4
-VALUES (780808080, 4, 'Finance', 'Josh', '6561 Cambie Street');
+VALUES (780808080, 4, 'Finance', 'Josh', 'Kim', '6561 Cambie Street');
 
 INSERT INTO Applicant4
-VALUES (943434343, 3, 'Accounting', 'Jack', '3455 Agronomy Rd');
+VALUES (943434343, 3, 'Accounting', 'Jack', 'Lee', '3455 Agronomy Rd');
 
 INSERT INTO Applicant4
-VALUES (722222222, 3, 'Medicine', 'Jane', '5981 Davie Drive');
+VALUES (722222222, 3, 'Medicine', 'Jane', 'Eyre', '5981 Davie Drive');
 
 INSERT INTO Applicant4
 VALUES (965748374, 3, 'Nutrition', 'Amanda', '7999 Penguin Drive');
