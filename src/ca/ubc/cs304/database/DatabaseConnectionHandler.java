@@ -154,6 +154,26 @@ public class DatabaseConnectionHandler {
 		
 		return result.toArray(new BranchModel[result.size()]);
 	}
+
+	public void updateApplicantMajor(int sin, String major) {
+        try {
+            PreparedStatement ps = connection.prepareStatement("UPDATE APPLICANT4 SET MAJOR = ? WHERE SIN = ?");
+            ps.setString(1, major);
+            ps.setInt(2, sin);
+
+            int rowCount = ps.executeUpdate();
+            if (rowCount == 0) {
+//                System.out.println(WARNING_TAG + " Branch " + id + " does not exist!");
+            }
+
+            connection.commit();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+            rollbackConnection();
+        }
+    }
 	
 	public void updateBranch(int id, String name) {
 		try {
