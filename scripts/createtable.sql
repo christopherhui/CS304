@@ -69,14 +69,14 @@ CREATE TABLE Applicant3
     PRIMARY KEY (FirstName, LastName));
 
 CREATE TABLE Applicant4
-(SIN		INTEGER,
- ProgramYear	INTEGER,
- Major		CHAR(20),
- FirstName	CHAR(20),
- LastName    CHAR(20),
- Address	CHAR(30),
- PRIMARY KEY (SIN),
- FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
+    (SIN		INTEGER,
+     ProgramYear	INTEGER,
+     Major		CHAR(20),
+     FirstName	CHAR(20),
+     LastName    CHAR(20),
+     Address	CHAR(30),
+     PRIMARY KEY (SIN),
+     FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
 
 CREATE TABLE Intern
 (SIN			INTEGER,

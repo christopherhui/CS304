@@ -1,5 +1,6 @@
 package ca.ubc.cs304.database;
 
+import ca.ubc.cs304.controller.Application;
 import ca.ubc.cs304.model.*;
 
 import java.sql.*;
@@ -40,7 +41,7 @@ public class DatabaseConnectionHandler {
 	public void deleteApplicant(int sin) {
 		ArrayList<Applicant> result = new ArrayList<Applicant>();
 		try {
-			PreparedStatement ps4 = connection.prepareStatement("SELECT * FROM APPLICANT4 a4, APPLICANT3 a3, APPLICANT1 a1 WHERE a4.SIN = ? AND a4.FIRSTNAME = a3.FIRSTNAME AND a1.ADDRESS = a4.ADDRESS");
+			PreparedStatement ps4 = connection.prepareStatement("SELECT DISTINCT * FROM APPLICANT4 a4, APPLICANT3 a3, APPLICANT1 a1 WHERE a4.SIN = ? AND a4.FIRSTNAME = a3.FIRSTNAME AND a1.ADDRESS = a4.ADDRESS");
 			ps4.setInt(1, sin);
 			ResultSet rs = ps4.executeQuery();
 
@@ -141,13 +142,13 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
-	// Projection query, returns all company names that are hiring
+	// Projection query, returns all company names that are hiring in sorted order
 	public List<Company> getCompanyHiringInfo() {
 		List<Company> result = new ArrayList<>();
 		
 		try {
 			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT COMPANY_NAME FROM COMPANY");
+			ResultSet rs = stmt.executeQuery("SELECT DISTINCT COMPANY_NAME FROM COMPANY ORDER BY COMPANY_NAME DESC");
 
 //    		// get info on ResultSet
 //    		ResultSetMetaData rsmd = rs.getMetaData();
@@ -179,7 +180,7 @@ public class DatabaseConnectionHandler {
 		List<Job> result = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = connection.prepareStatement("SELECT * FROM JOB WHERE DESCRIPTION LIKE ?");
+			PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM JOB WHERE DESCRIPTION LIKE ?");
 			ps.setString(1, "%" + filter + "%");
 			ResultSet rs = ps.executeQuery();
 
@@ -205,7 +206,7 @@ public class DatabaseConnectionHandler {
 		List<Pair<Applicant, ApplicationThroughFor>> result = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = connection.prepareStatement("SELECT a.SIN, a.FIRSTNAME, a.LASTNAME, a.ADDRESS, " +
+			PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT a.SIN, a.FIRSTNAME, a.LASTNAME, a.ADDRESS, " +
 					"a.MAJOR, a.PROGRAMYEAR, atf.PLATFORM_NAME, atf.APP_ID " +
 					"FROM JOB j, APPLICATION_THROUGH_FOR atf, APPLICANT4 a " +
 					"WHERE j.COMPANY_NAME = ? " +
@@ -220,6 +221,80 @@ public class DatabaseConnectionHandler {
 				ApplicationThroughFor applicationThroughFor = new ApplicationThroughFor(rs.getInt("SIN"), Company_Name,
 						rs.getString("App_ID"), rs.getString("Platform_Name"));
 				result.add(new Pair<>(applicant, applicationThroughFor));
+			}
+
+			rs.close();
+			ps.close();
+
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+		return result;
+	}
+
+	// Aggregation query - Finds the number of applications an applicant has sent
+	public int findNoApps(int SIN) {
+		int result = -1;
+		try {
+			PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) AS total FROM APPLICANT4 a4 " +
+					"WHERE SIN = ?");
+			ps.setInt(1, SIN);
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()) {
+				result = rs.getInt("total");
+			}
+
+			rs.close();
+			ps.close();
+
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+		return result;
+	}
+
+	// Nested Aggregation with Group-By - Returns the companies that hire interns that have completed above 1 work terms, on average.
+	// We also want companies that have at least hired at least 2 interns.
+	public List<Company> findHireAvgTermsWorked() {
+		List<Company> result = new ArrayList<>();
+		try {
+			PreparedStatement ps = connection.prepareStatement("SELECT c.COMPANY_NAME, c.HIRINGAMT, c.TYPE " +
+					"FROM COMPANY c, APPLICATION_THROUGH_FOR atf, INTERN i " +
+					"WHERE c.COMPANY_NAME = atf.COMPANY_NAME AND atf.SIN = i.SIN " +
+					"GROUP BY c.COMPANY_NAME, c.HIRINGAMT, c.TYPE " +
+					"HAVING COUNT(i.SIN) >= 2 AND AVG(i.NUMBER_OF_TERMS) >= 1.5");
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()) {
+				Company company = new Company(rs.getString("Company_Name"), rs.getInt("HiringAmt"), rs.getString("Type"));
+				result.add(company);
+			}
+
+			rs.close();
+			ps.close();
+
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+		return result;
+	}
+
+	// Division - Returns a list of applicants who have applied to every company possible
+	public List<Applicant> appliedToAll() {
+		List<Applicant> result = new ArrayList<>();
+		try {
+			PreparedStatement ps = connection.prepareStatement("SELECT a4.SIN, PROGRAMYEAR, MAJOR, FIRSTNAME, LASTNAME, ADDRESS FROM " +
+					"APPLICATION_THROUGH_FOR atf, APPLICANT4 a4 " +
+					"WHERE atf.SIN = a4.SIN AND NOT EXISTS " +
+					"(SELECT COMPANY_NAME FROM COMPANY MINUS " +
+					"(SELECT DISTINCT COMPANY_NAME FROM APPLICATION_THROUGH_FOR atf2 WHERE atf2.SIN = atf.SIN))");
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()) {
+				Applicant applicant = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"), rs.getString("Major"),
+						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), -1);
+				result.add(applicant);
 			}
 
 			rs.close();
