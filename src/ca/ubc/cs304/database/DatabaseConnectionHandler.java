@@ -1,5 +1,6 @@
 package ca.ubc.cs304.database;
 
+import ca.ubc.cs304.model.Applicant;
 import ca.ubc.cs304.model.BranchModel;
 
 import java.sql.*;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * This class handles all database related transactions
  */
 public class DatabaseConnectionHandler {
-	private static final String ORACLE_URL = "jdbc:oracle:thin:@localhost:1522:stu";
+	private static final String ORACLE_URL = "jdbc:oracle:thin:@dbhost.students.cs.ubc.ca:1522:stu";
 	private static final String EXCEPTION_TAG = "[EXCEPTION]";
 	private static final String WARNING_TAG = "[WARNING]";
 	
@@ -32,6 +33,28 @@ public class DatabaseConnectionHandler {
 			}
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+		}
+	}
+
+	public void deleteApplicant(int sin) {
+		ArrayList<Applicant> result = new ArrayList<Applicant>();
+		try {
+			// con is a Connection object
+			Statement stmt = connection.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM APPLICANT4 a4 WHERE a4.SIN = ?");
+
+			while(rs.next()) {
+				Applicant model = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"),
+						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"));
+				result.add(model);
+			}
+
+			rs.close();
+			stmt.close();
+
+		} catch (SQLException e) {
+			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+			rollbackConnection();
 		}
 	}
 
