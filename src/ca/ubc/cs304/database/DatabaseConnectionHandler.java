@@ -45,7 +45,7 @@ public class DatabaseConnectionHandler {
 
 			while(rs.next()) {
 				Applicant model = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"),
-						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"));
+						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), doe);
 				result.add(model);
 			}
 
@@ -78,23 +78,41 @@ public class DatabaseConnectionHandler {
 		}
 	}
 	
-	public void insertBranch(BranchModel model) {
+	public void insertApplicant(Applicant applicant) {
 		try {
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO branch VALUES (?,?,?,?,?)");
-			ps.setInt(1, model.getId());
-			ps.setString(2, model.getName());
-			ps.setString(3, model.getAddress());
-			ps.setString(4, model.getCity());
-			if (model.getPhoneNumber() == 0) {
-				ps.setNull(5, java.sql.Types.INTEGER);
-			} else {
-				ps.setInt(5, model.getPhoneNumber());
-			}
+			PreparedStatement ps4 = connection.prepareStatement("INSERT INTO APPLICANT4 VALUES (?,?,?,?,?)");
+			ps4.setInt(1, applicant.getSin());
+			ps4.setInt(2, applicant.getYear());
+			ps4.setString(3, applicant.getMajor());
+			ps4.setString(4, applicant.getFirstName());
+			ps4.setString(5, applicant.getAddress());
 
-			ps.executeUpdate();
+			ps4.executeUpdate();
 			connection.commit();
 
-			ps.close();
+			PreparedStatement ps1 = connection.prepareStatement("INSERT INTO APPLICANT1 VALUES (?,?,?)");
+			ps1.setString(1, applicant.getFirstName());
+			ps1.setString(2, applicant.getAddress());
+			if (applicant.getDoe() == null) {
+			    ps1.setNull(3, java.sql.Types.DATE);
+            } else {
+			    ps1.setDate(3, applicant.getDoe());
+            }
+
+			ps1.executeUpdate();
+			connection.commit();
+
+			PreparedStatement ps3 = connection.prepareStatement("INSERT INTO APPLICANT3 VALUES (?,?,?)");
+			ps3.setString(1, applicant.getFirstName());
+			ps3.setString(2, applicant.getLastName());
+			ps3.setString(3, applicant.getAddress());
+
+			ps3.executeUpdate();
+			connection.commit();
+
+			ps4.close();
+            ps1.close();
+			ps3.close();
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 			rollbackConnection();

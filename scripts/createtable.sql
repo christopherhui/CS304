@@ -58,14 +58,14 @@ CREATE TABLE Requirement4
 
 CREATE TABLE Applicant1
     (FirstName		CHAR(20),
-    Address		    CHAR (30),
+    Address		    CHAR(30),
     DateOfBirth		DATE,
     PRIMARY KEY 	(FirstName, Address));
 
 CREATE TABLE Applicant3
     (FirstName	CHAR(20),
     LastName	CHAR(20),
-    Address	CHAR(30),
+    Address	    CHAR(30),
     PRIMARY KEY (FirstName, LastName));
 
 CREATE TABLE Applicant4
