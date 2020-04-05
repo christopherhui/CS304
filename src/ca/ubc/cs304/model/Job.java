@@ -2,7 +2,7 @@ package ca.ubc.cs304.model;
 
 
 public class Job {
-    private final int jobNo; //primary key
+    private int jobNo = 0; //primary key
     private final String companyName; //foreign key from Company
     private final String jobTitle;
     private final String description;
