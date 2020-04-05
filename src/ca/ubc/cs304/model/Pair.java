@@ -10,6 +10,14 @@ public class Pair<K, V> {
         this.second = value;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                first +
+                ", " + second +
+                '}';
+    }
+
     public void setFirst(K first) { this.first = first; }
     public void setSecond(V second) { this.second = second; }
     public K getFirst()   { return first; }
