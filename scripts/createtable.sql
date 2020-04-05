@@ -373,15 +373,18 @@ VALUES (799999999, 'UGO', 'A1004', 'Glassdoor', 'Resume, Coverletter', 'Accepted
 
 INSERT INTO Application_Through_For
 VALUES (965748374, 'EY', 'A1005', 'LinkedIn', 'Resume, Coverletter', 'Interviewing');
+                                                 
+INSERT INTO Application_Through_For
+VALUES (777777777, 'EY', 'A1006', 'LinkedIn', 'Resume, Coverletter', 'Interviewing');                                                 
 
 INSERT INTO Application_Through_For
-VALUES (777777777, 'Amazon', 'A1006', 'LinkedIn', 'Resume, Coverletter', 'Reviewing');
+VALUES (777777777, 'Amazon', 'A1007', 'LinkedIn', 'Resume, Coverletter', 'Reviewing');
 
 INSERT INTO Application_Through_For
-VALUES (777777777, 'ABC Marketing Agency', 'A1007', 'LinkedIn', 'Resume, Coverletter', 'Closed');
+VALUES (777777777, 'ABC Marketing Agency', 'A1008', 'LinkedIn', 'Resume, Coverletter', 'Closed');
 
 INSERT INTO Application_Through_For
-VALUES (777777777, 'UGO', 'A1008', 'LinkedIn', 'Resume, Coverletter', 'Accepted');
+VALUES (777777777, 'UGO', 'A1009', 'LinkedIn', 'Resume, Coverletter', 'Accepted');
 
 
 
