@@ -57,26 +57,26 @@ CREATE TABLE Requirement4
  UNIQUE 	(Job_Number, Company_Name));
 
 CREATE TABLE Applicant1
-    (FirstName		CHAR(20),
-    Address		    CHAR(30),
-    DateOfBirth		NUMBER,
-    PRIMARY KEY 	(FirstName, Address));
+(FirstName		CHAR(20),
+ Address		    CHAR(30),
+ YearOfBirth		INTEGER,
+ PRIMARY KEY 	(FirstName, Address));
 
 CREATE TABLE Applicant3
-    (FirstName	CHAR(20),
-    LastName	CHAR(20),
-    Address	    CHAR(30),
-    PRIMARY KEY (FirstName, LastName));
+(FirstName	CHAR(20),
+ LastName	CHAR(20),
+ Address	    CHAR(30),
+ PRIMARY KEY (FirstName, LastName));
 
 CREATE TABLE Applicant4
-    (SIN		INTEGER,
-     ProgramYear	INTEGER,
-     Major		CHAR(20),
-     FirstName	CHAR(20),
-     LastName    CHAR(20),
-     Address	CHAR(30),
-     PRIMARY KEY (SIN),
-     FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
+(SIN		INTEGER,
+ ProgramYear	INTEGER,
+ Major		CHAR(20),
+ FirstName	CHAR(20),
+ LastName    CHAR(20),
+ Address	CHAR(30),
+ PRIMARY KEY (SIN),
+ FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
 
 CREATE TABLE Intern
 (SIN			INTEGER,
@@ -201,19 +201,19 @@ INSERT INTO Requirement4
 VALUES ('Richmond BC', 'Excel, Word, Powerpoint, Outlook', 1004, 'UGO', 1);
 
 INSERT INTO Applicant1
-VALUES ('John', '3909 Harper Street', to_date('1989-07-26','yyyy-mm-dd'));
+VALUES ('John', '3909 Harper Street', 1989);
 
 INSERT INTO Applicant1
-VALUES ('Christopher', '2359 Red Hawk Road', to_date('1955-08-29','yyyy-mm-dd'));
+VALUES ('Christopher', '2359 Red Hawk Road', 1955);
 
 INSERT INTO Applicant1
-VALUES ('Nick', '3061 Park Street', to_date('1978-01-10','yyyy-mm-dd'));
+VALUES ('Nick', '3061 Park Street', 1978);
 
 INSERT INTO Applicant1
-VALUES ('Peter', '2403 Myra Street', to_date('1991-05-23','yyyy-mm-dd'));
+VALUES ('Peter', '2403 Myra Street', 1991);
 
 INSERT INTO Applicant1
-VALUES ('Ivan', '492 Farm Meadow Drive', to_date('1968-11-06','yyyy-mm-dd'));
+VALUES ('Ivan', '492 Farm Meadow Drive', 1968);
 
 INSERT INTO Applicant3
 VALUES ('John', 'Smith', '3909 Harper Street');
@@ -252,34 +252,34 @@ INSERT INTO Degree
 VALUES (4,'Finance','Commerce');
 
 INSERT INTO Applicant4
-VALUES (777777777, 3, 'Psychology', 'John', '3909 Harper Street');
+VALUES (777777777, 3, 'Psychology', 'John', 'Lee', '3909 Harper Street');
 
 INSERT INTO Applicant4
-VALUES (788888888, 3, 'Computer Science','Christopher', '2359 Red Hawk Road');
+VALUES (788888888, 3, 'Computer Science','Christopher', 'Chris','2359 Red Hawk Road');
 
 INSERT INTO Applicant4
-VALUES (977777777, 3, 'Business','Nick', '3061 Park Street');
+VALUES (977777777, 3, 'Business','Nick', 'Nee', '3061 Park Street');
 --
 INSERT INTO Applicant4
-VALUES (999999999, 4, 'Economics','Peter', '2403 Myra Street');
+VALUES (999999999, 4, 'Economics','Peter', 'Kalen','2403 Myra Street');
 
 INSERT INTO Applicant4
-VALUES (799999999, 5,'History' ,'Ivan', '492 Farm Meadow Drive');
+VALUES (799999999, 5,'History' ,'Ivan', 'Hay','492 Farm Meadow Drive');
 
 INSERT INTO Applicant4
-VALUES (755555555, 2, 'Physics', 'Tom', '5800 Puget Drive');
+VALUES (755555555, 2, 'Physics', 'Tom', 'Hanks','5800 Puget Drive');
 
 INSERT INTO Applicant4
-VALUES (780808080, 4, 'Finance', 'Josh', '6561 Cambie Street');
+VALUES (780808080, 4, 'Finance', 'Josh', 'Pan','6561 Cambie Street');
 
 INSERT INTO Applicant4
-VALUES (943434343, 3, 'Computer Science', 'Jack', '3455 Agronomy Rd');
+VALUES (943434343, 3, 'Computer Science', 'Jack', 'Ma', '3455 Agronomy Rd');
 
 INSERT INTO Applicant4
-VALUES (722222222, 3, 'Computer Science', 'Jane', '5981 Davie Drive');
+VALUES (722222222, 3, 'Computer Science', 'Jane', 'Austen','5981 Davie Drive');
 
 INSERT INTO Applicant4
-VALUES (965748374, 3, 'Computer Science', 'Amanda', '7999 Penguin Drive');
+VALUES (965748374, 3, 'Computer Science', 'Amanda', 'Cheng','7999 Penguin Drive');
 
 INSERT INTO Intern
 VALUES (777777777, 1);
@@ -373,9 +373,9 @@ VALUES (799999999, 'UGO', 'A1004', 'Glassdoor', 'Resume, Coverletter', 'Accepted
 
 INSERT INTO Application_Through_For
 VALUES (965748374, 'EY', 'A1005', 'LinkedIn', 'Resume, Coverletter', 'Interviewing');
-                                                 
+
 INSERT INTO Application_Through_For
-VALUES (777777777, 'EY', 'A1006', 'LinkedIn', 'Resume, Coverletter', 'Interviewing');                                                 
+VALUES (777777777, 'EY', 'A1006', 'LinkedIn', 'Resume, Coverletter', 'Interviewing');
 
 INSERT INTO Application_Through_For
 VALUES (777777777, 'Amazon', 'A1007', 'LinkedIn', 'Resume, Coverletter', 'Reviewing');
@@ -385,6 +385,7 @@ VALUES (777777777, 'ABC Marketing Agency', 'A1008', 'LinkedIn', 'Resume, Coverle
 
 INSERT INTO Application_Through_For
 VALUES (777777777, 'UGO', 'A1009', 'LinkedIn', 'Resume, Coverletter', 'Accepted');
+
 
 
 

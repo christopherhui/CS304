@@ -1,7 +1,7 @@
 package ca.ubc.cs304.ui;
 
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
-import ca.ubc.cs304.model.Job;
+import ca.ubc.cs304.model.Applicant;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,15 +33,15 @@ public class TerminalTransactions {
 		
 		while (choice != 5) {
 			System.out.println();
-			System.out.println("1. Insert job");
-			System.out.println("2. Delete job");
-			System.out.println("3. Update application status");
-			System.out.println("4. Show job titles from specific company");
-			System.out.println("5. Show company names from job postings");
-			System.out.println("6. Show locations for specific job position");
-			System.out.println("7. Show total number of jobs available");
-			System.out.println("8. Show total number of jobs from each company");
-			System.out.println("9. Find SIN of job applicant who applied to all companies");
+			System.out.println("1. Insert application");
+			System.out.println("2. Delete application");
+			System.out.println("3. Update applicant major");
+			System.out.println("4. Show company matching description");
+			System.out.println("5. Show all companies hiring");
+			System.out.println("6. Show all applications from an applicant");
+			System.out.println("7. Find number of applications an applicant sent");
+			System.out.println("8. Find companies whose interns have average > 1 work term");
+			System.out.println("9. Find applicants who applied to every company");
 			System.out.println("10. Quit");
 			System.out.print("Please choose one of the above options: ");
 
@@ -61,22 +61,22 @@ public class TerminalTransactions {
 					handleUpdateOption();
 					break;
 				case 4:
-					handleShowJobsFromCompany();
+					handleSelectionOption();
 					break;
 				case 5:
-					handleShowCompanyNames();
+					handleProjectionOption();
 					break;
 				case 6:
-					handleShowLocations();
+					handleJoinOption();
 					break;
 				case 7:
-					handleShowTotalNumJobs();
+					handleAggregationOption();
 					break;
 				case 8:
-					handleShowTotalJobsPerCompany();
+					handleNestedAggregationOption();
 					break;
 				case 9:
-					handleShowSinAllJobs();
+					handleDivisionOption();
 					break;
 				case 10:
 					handleQuitOption();
@@ -89,69 +89,80 @@ public class TerminalTransactions {
 		}		
 	}
 
-	private void handleShowSinAllJobs() {
+	private void handleDivisionOption() {
 	}
 
-	private void handleShowTotalJobsPerCompany() {
+	private void handleNestedAggregationOption() {
 	}
 
-	private void handleShowTotalNumJobs() {
+	private void handleAggregationOption() {
 	}
 
-	private void handleShowLocations() {
+	private void handleJoinOption() {
 	}
 
-	private void handleShowCompanyNames() {
+	private void handleProjectionOption() {
 	}
 
-	private void handleShowJobsFromCompany() {
+	private void handleSelectionOption() {
 	}
 
 	private void handleDeleteOption() {
-		int branchId = INVALID_INPUT;
-		while (branchId == INVALID_INPUT) {
-			System.out.print("Please enter the branch ID you wish to delete: ");
-			branchId = readInteger(false);
-			if (branchId != INVALID_INPUT) {
-				delegate.deleteBranch(branchId);
+		int sin = INVALID_INPUT;
+		while (sin == INVALID_INPUT) {
+			System.out.print("Please enter the SIN of the applicant you wish to delete: ");
+			sin = readInteger(false);
+			if (sin != INVALID_INPUT) {
+				delegate.deleteBranch(sin);
 			}
 		}
 	}
 	
 	private void handleInsertOption() {
-		int jobNo = INVALID_INPUT;
-		while (jobNo == INVALID_INPUT) {
-			System.out.print("Please enter the job number you wish to insert: ");
-			jobNo = readInteger(false);
+		int sin = INVALID_INPUT;
+		while (sin == INVALID_INPUT) {
+			System.out.print("Please enter the SIN of the applicant you wish to insert: ");
+			sin = readInteger(false);
+		}
+
+		int year = INVALID_INPUT;
+		while (year == INVALID_INPUT) {
+			System.out.print("Please enter the year of the applicant you wish to insert: ");
+			year = readInteger(false);
 		}
 		
-		String companyName = null;
-		while (companyName == null || companyName.length() <= 0) {
-			System.out.print("Please enter the company name you wish to insert: ");
-			companyName = readLine().trim();
+		String major = null;
+		while (major == null || major.length() <= 0) {
+			System.out.print("Please enter the major of the applicant you wish to insert: ");
+			major = readLine().trim();
+		}
+
+		String firstName = null;
+		while (firstName == null || firstName.length() <= 0) {
+			System.out.print("Please enter the first name of the applicant you wish to insert: ");
+			firstName = readLine().trim();
+		}
+
+		String lastName = null;
+		while (lastName == null || lastName.length() <= 0) {
+			System.out.print("Please enter the lastName you wish to insert: ");
+			lastName = readLine().trim();
+		}
+
+		String address = null;
+		while (address == null || address.length() <= 0) {
+			System.out.print("Please enter the address you wish to insert: ");
+			address = readLine().trim();
 		}
 		
-		// branch address is allowed to be null so we don't need to repeatedly ask for the address
-		System.out.print("Please enter the job title you wish to insert: ");
-		String jobTitle = readLine().trim();
-		if (jobTitle.length() == 0) {
-			jobTitle = null;
+		Integer doe = null;
+		while (doe == null) {
+			System.out.print("Please enter the year of birth you wish to insert: ");
+			doe = readInteger(true);
 		}
 		
-		String description = null;
-		while (description == null || description.length() <= 0) {
-			System.out.print("Please enter the description you wish to insert: ");
-			description = readLine().trim();
-		}
-		
-//		int phoneNumber = INVALID_INPUT;
-//		while (phoneNumber == INVALID_INPUT) {
-//			System.out.print("Please enter the branch phone number you wish to insert: ");
-//			phoneNumber = readInteger(true);
-//		}
-		
-		Job model = new Job(jobNo, companyName, jobTitle, description);
-//		delegate.insertBranch(model);
+		Applicant model = new Applicant(sin, year, major, firstName, lastName, address, doe);
+		delegate.insertBranch(model);
 	}
 	
 	private void handleQuitOption() {
@@ -169,19 +180,19 @@ public class TerminalTransactions {
 	}
 	
 	private void handleUpdateOption() {
-		int id = INVALID_INPUT;
-		while (id == INVALID_INPUT) {
-			System.out.print("Please enter the branch ID you wish to update: ");
-			id = readInteger(false);
+		int sin = INVALID_INPUT;
+		while (sin == INVALID_INPUT) {
+			System.out.print("Please enter SIN of applicant you wish to update: ");
+			sin = readInteger(false);
 		}
 		
-		String name = null;
-		while (name == null || name.length() <= 0) {
-			System.out.print("Please enter the branch name you wish to update: ");
-			name = readLine().trim();
+		String major = null;
+		while (major == null || major.length() <= 0) {
+			System.out.print("Please enter the major you wish to update to: ");
+			major = readLine().trim();
 		}
 
-		delegate.updateBranch(id, name);
+		delegate.updateBranch(sin, major);
 	}
 	
 	private int readInteger(boolean allowEmpty) {
@@ -212,3 +223,4 @@ public class TerminalTransactions {
 		return result;
 	}
 }
+
