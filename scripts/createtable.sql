@@ -16,65 +16,65 @@ DROP TABLE Degree;
 DROP TABLE Company;
 
 CREATE TABLE Company
-(Company_Name 	CHAR(25),
+(Company_Name 	VARCHAR2(25),
  HiringAmt		INTEGER,
- Type			CHAR(20),
+ Type			VARCHAR2(20),
  PRIMARY KEY		(Company_Name));
 
 CREATE TABLE Degree
 (ProgramYear	INTEGER,
- Major		    CHAR(20),
- Faculty		CHAR(20),
+ Major		    VARCHAR2(20),
+ Faculty		VARCHAR2(20),
  PRIMARY KEY (ProgramYear, Major));
 
 CREATE TABLE Job
 (Job_Number		INTEGER,
- Company_Name 	CHAR(25) NOT NULL,
- Job_Title 		CHAR(100),
- Description 	CHAR(100),
+ Company_Name 	VARCHAR2(25) NOT NULL,
+ Job_Title 		VARCHAR2(100),
+ Description 	VARCHAR2(100),
  PRIMARY KEY (Job_Number, Company_Name),
  FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE);
 
 CREATE TABLE Requirement1
-(Location		CHAR(20),
- Citizenship	CHAR (20),
+(Location		VARCHAR2(20),
+ Citizenship	VARCHAR2 (20),
  PRIMARY KEY 	(Location));
 
 CREATE TABLE Requirement3
-(Skills		CHAR(100),
+(Skills		VARCHAR2(100),
  GPA		REAL,
  PRIMARY KEY 	(Skills));
 
 CREATE TABLE Requirement4
-(Location	CHAR(20),
- Skills		CHAR (50),
+(Location	VARCHAR2(20),
+ Skills		VARCHAR2 (50),
  Job_Number	INTEGER NOT NULL,
- Company_Name CHAR(25),
- Experience	CHAR(30),
+ Company_Name VARCHAR2(25),
+ Experience	VARCHAR2(30),
  PRIMARY KEY 	(Location, Skills),
  FOREIGN KEY (Job_Number, Company_Name)
      REFERENCES Job ON DELETE CASCADE,
  UNIQUE 	(Job_Number, Company_Name));
 
 CREATE TABLE Applicant1
-(FirstName		CHAR(20),
- Address		    CHAR(30),
+(FirstName		VARCHAR2(20),
+ Address		    VARCHAR2(30),
  YearOfBirth		INTEGER,
  PRIMARY KEY 	(FirstName, Address));
 
 CREATE TABLE Applicant3
-(FirstName	CHAR(20),
- LastName	CHAR(20),
- Address	    CHAR(30),
+(FirstName	VARCHAR2(20),
+ LastName	VARCHAR2(20),
+ Address	    VARCHAR2(30),
  PRIMARY KEY (FirstName, LastName));
 
 CREATE TABLE Applicant4
 (SIN		INTEGER,
  ProgramYear	INTEGER,
- Major		CHAR(20),
- FirstName	CHAR(20),
- LastName    CHAR(20),
- Address	CHAR(30),
+ Major		VARCHAR2(20),
+ FirstName	VARCHAR2(20),
+ LastName    VARCHAR2(20),
+ Address	VARCHAR2(30),
  PRIMARY KEY (SIN),
  FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
 
@@ -97,29 +97,29 @@ CREATE TABLE Full_Time
  FOREIGN KEY (SIN) REFERENCES Applicant4);
 
 CREATE TABLE School
-(School_Name	CHAR(40),
- Location	CHAR(20),
+(School_Name	VARCHAR2(40),
+ Location	VARCHAR2(20),
  PRIMARY KEY (School_Name));
 
 CREATE TABLE Attended
 (SIN			INTEGER,
- School_Name		CHAR(40),
+ School_Name		VARCHAR2(40),
  PRIMARY KEY (SIN, School_Name),
  FOREIGN KEY (SIN) REFERENCES Applicant4,
  FOREIGN KEY (School_Name) REFERENCES School);
 
 CREATE TABLE Platform
-(Platform_Name	CHAR (30),
- Type CHAR (20),
+(Platform_Name	VARCHAR2 (30),
+ Type VARCHAR2 (20),
  PRIMARY KEY (Platform_Name));
 
 CREATE TABLE Application_Through_For
 (SIN			INTEGER,
- Company_Name	CHAR(25),
- App_ID			CHAR(10),
- Platform_Name	CHAR(30) NOT NULL,
- Documents		CHAR(20),
- Status			CHAR(20),
+ Company_Name	VARCHAR2(25),
+ App_ID			VARCHAR2(10),
+ Platform_Name	VARCHAR2(30) NOT NULL,
+ Documents		VARCHAR2(20),
+ Status			VARCHAR2(20),
  PRIMARY KEY (SIN, Company_Name, App_ID),
  FOREIGN KEY (SIN) REFERENCES Applicant4 ON DELETE CASCADE,
  FOREIGN KEY (Company_Name) REFERENCES Company ON DELETE CASCADE,
