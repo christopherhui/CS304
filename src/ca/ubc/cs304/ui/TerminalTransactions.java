@@ -1,11 +1,11 @@
 package ca.ubc.cs304.ui;
 
+import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
+import ca.ubc.cs304.model.BranchModel;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
-import ca.ubc.cs304.model.BranchModel;
 
 /**
  * The class is only responsible for handling terminal text inputs. 
@@ -33,12 +33,17 @@ public class TerminalTransactions {
 		
 		while (choice != 5) {
 			System.out.println();
-			System.out.println("1. Insert branch");
-			System.out.println("2. Delete branch");
-			System.out.println("3. Update branch name");
-			System.out.println("4. Show branch");
-			System.out.println("5. Quit");
-			System.out.print("Please choose one of the above 5 options: ");
+			System.out.println("1. Insert job");
+			System.out.println("2. Delete job");
+			System.out.println("3. Update application status");
+			System.out.println("4. Show job titles from specific company");
+			System.out.println("5. Show company names from job postings");
+			System.out.println("6. Show locations for specific job position");
+			System.out.println("7. Show total number of jobs available");
+			System.out.println("8. Show total number of jobs from each company");
+			System.out.println("9. Find SIN of job applicant who applied to all companies");
+			System.out.println("10. Quit");
+			System.out.print("Please choose one of the above options: ");
 
 			choice = readInteger(false);
 
@@ -55,10 +60,25 @@ public class TerminalTransactions {
 				case 3: 
 					handleUpdateOption();
 					break;
-				case 4:  
-					delegate.showBranch(); 
+				case 4:
+					handleShowJobsFromCompany();
 					break;
 				case 5:
+					handleShowCompanyNames();
+					break;
+				case 6:
+					handleShowLocations();
+					break;
+				case 7:
+					handleShowTotalNumJobs();
+					break;
+				case 8:
+					handleShowTotalJobsPerCompany();
+					break;
+				case 9:
+					handleShowSinAllJobs();
+					break;
+				case 10:
 					handleQuitOption();
 					break;
 				default:
@@ -68,7 +88,25 @@ public class TerminalTransactions {
 			}
 		}		
 	}
-	
+
+	private void handleShowSinAllJobs() {
+	}
+
+	private void handleShowTotalJobsPerCompany() {
+	}
+
+	private void handleShowTotalNumJobs() {
+	}
+
+	private void handleShowLocations() {
+	}
+
+	private void handleShowCompanyNames() {
+	}
+
+	private void handleShowJobsFromCompany() {
+	}
+
 	private void handleDeleteOption() {
 		int branchId = INVALID_INPUT;
 		while (branchId == INVALID_INPUT) {
