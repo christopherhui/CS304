@@ -211,9 +211,7 @@ public class DatabaseConnectionHandler {
 		try {
 			PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT a.SIN, a.FIRSTNAME, a.LASTNAME, a.ADDRESS, " +
 					"a.MAJOR, a.PROGRAMYEAR, atf.PLATFORM_NAME, atf.APP_ID " +
-					"FROM JOB j, APPLICATION_THROUGH_FOR atf, APPLICANT4 a " +
-					"WHERE j.COMPANY_NAME = ? " +
-					"AND atf.COMPANY_NAME = j.COMPANY_NAME " +
+					"FROM JOB j, APPLICATION_THROUGH_FOR atf, APPLICANT4 a WHERE j.COMPANY_NAME = ? AND atf.COMPANY_NAME = j.COMPANY_NAME " +
 					"AND atf.SIN = a.SIN");
 			ps.setString(1, Company_Name);
 			ResultSet rs = ps.executeQuery();
