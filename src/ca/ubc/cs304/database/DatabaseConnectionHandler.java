@@ -83,7 +83,7 @@ public class DatabaseConnectionHandler {
 	// Insert query
 	public String insertApplicant(Applicant applicant) {
 		try {
-			PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM DEGREE WHERE MAJOR = ? AND PROGRAMYEAR = ?");
+			PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM Degree WHERE Major = ? AND ProgramYear = ?");
 			ps2.setString(1, applicant.getMajor());
 			ps2.setInt(2, applicant.getYear());
 			ResultSet rs = ps2.executeQuery();
@@ -236,7 +236,7 @@ public class DatabaseConnectionHandler {
 
 			while(rs.next()) {
 				Applicant applicant = new Applicant(-1, rs.getInt("ProgramYear"), rs.getString("Major"),
-						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getInt("doe"));
+						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), -1);
 				ApplicationThroughFor applicationThroughFor = new ApplicationThroughFor(rs.getInt("SIN"), Company_Name,
 						rs.getString("App_ID"), rs.getString("Platform_Name"));
 				result.add(new Pair<>(applicant, applicationThroughFor));
