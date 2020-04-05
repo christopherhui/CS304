@@ -19,10 +19,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="ojdbc8" level="application" />
-    <orderEntry type="library" name="Spring-5.2.3.RELEASE" level="project" />
-    <orderEntry type="library" name="JAX-RS-2.1.1" level="project" />
-    <orderEntry type="library" name="JAX-RS-2.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="GlassFish 4.1.1" level="application_server_libraries" />
     <orderEntry type="library" scope="PROVIDED" name="GlassFish 4.1.1 - RESTful Web Service" level="application_server_libraries" />
   </component>
 </module>
