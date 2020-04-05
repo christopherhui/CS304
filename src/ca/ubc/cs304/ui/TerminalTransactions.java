@@ -151,7 +151,7 @@ public class TerminalTransactions {
 //		}
 		
 		Job model = new Job(jobNo, companyName, jobTitle, description);
-		delegate.insertBranch(model);
+//		delegate.insertBranch(model);
 	}
 	
 	private void handleQuitOption() {

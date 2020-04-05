@@ -14,7 +14,7 @@ public class Requirements {
     public Requirements(String location, List skills, int jobNo, int citizenship, int gpa, String experience) {
         this.location = location;
         this.skills = skills;
-        this.jobNo = Job.getJobNo();
+        this.jobNo = jobNo;
         this.citizenship = citizenship;
         this.gpa = gpa;
         this.experience = experience;
