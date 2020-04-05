@@ -1,12 +1,3 @@
-// const sin = $('#SIN');
-// const year = $('#Year');
-// const major = $('#Major');
-// const fname = $('#fn');
-// const lname = $('#ln');
-// const address = $('#address');
-
-// <input id="sin"> </input>
-
 let sin = document.getElementById("sinField");
 let year = document.getElementById("yearField");
 let major = document.getElementById("majorField");
@@ -22,7 +13,7 @@ $('#addButton').click(() => {
 
     submit.done(function (result) {
         if (result === "Success") {
- //           $('#text-bubble').text(`Successfully added in applicant with name ${fname} ${lname}!`);
+            //           $('#text-bubble').text(`Successfully added in applicant with name ${fname} ${lname}!`);
             alert("Successfully added in applicant with name ${fname} ${lname}!");
         }
         else {
@@ -35,8 +26,11 @@ $('#addButton').click(() => {
     // }
 });
 
-// for (let res : result) {
-//     let jobNo = res['jobNo']; // 1000
-//     let jobTitle = res['jobTitle'];
-//     let description = res['description'];
-// }
+for (let res in result) {
+    let sin = res['sin']; 
+    let year = res['year'];
+    let major = res['major'];
+    let fname = res['fname'];
+    let lname = res['lname'];
+    let address = res['address'];
+};
