@@ -10,7 +10,7 @@ public class DeleteQueries {
     private DatabaseConnectionHandler databaseConnectionHandler = DCHSingleton.getDatabaseConnectionHandler();
 
     @DeleteMapping("/applicant/delete-applicant/{sin}")
-    public String updateMajor(@PathVariable int sin) {
+    public String deleteApplicant(@PathVariable int sin) {
         return databaseConnectionHandler.deleteApplicant(sin);
     }
 }
