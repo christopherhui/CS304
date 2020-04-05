@@ -333,9 +333,6 @@ public class DatabaseConnectionHandler {
 		}
 	}
 
-	public void insertBranch(Job model) {
-	}
-
 	public void deleteBranch(int branchId) {
 	}
 
