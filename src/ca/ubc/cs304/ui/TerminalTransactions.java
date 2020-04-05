@@ -1,7 +1,7 @@
 package ca.ubc.cs304.ui;
 
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
-import ca.ubc.cs304.model.BranchModel;
+import ca.ubc.cs304.model.Job;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -119,42 +119,38 @@ public class TerminalTransactions {
 	}
 	
 	private void handleInsertOption() {
-		int id = INVALID_INPUT;
-		while (id == INVALID_INPUT) {
-			System.out.print("Please enter the branch ID you wish to insert: ");
-			id = readInteger(false);
+		int jobNo = INVALID_INPUT;
+		while (jobNo == INVALID_INPUT) {
+			System.out.print("Please enter the job number you wish to insert: ");
+			jobNo = readInteger(false);
 		}
 		
-		String name = null;
-		while (name == null || name.length() <= 0) {
-			System.out.print("Please enter the branch name you wish to insert: ");
-			name = readLine().trim();
+		String companyName = null;
+		while (companyName == null || companyName.length() <= 0) {
+			System.out.print("Please enter the company name you wish to insert: ");
+			companyName = readLine().trim();
 		}
 		
 		// branch address is allowed to be null so we don't need to repeatedly ask for the address
-		System.out.print("Please enter the branch address you wish to insert: ");
-		String address = readLine().trim();
-		if (address.length() == 0) {
-			address = null;
+		System.out.print("Please enter the job title you wish to insert: ");
+		String jobTitle = readLine().trim();
+		if (jobTitle.length() == 0) {
+			jobTitle = null;
 		}
 		
-		String city = null;
-		while (city == null || city.length() <= 0) {
-			System.out.print("Please enter the branch city you wish to insert: ");
-			city = readLine().trim();
+		String description = null;
+		while (description == null || description.length() <= 0) {
+			System.out.print("Please enter the description you wish to insert: ");
+			description = readLine().trim();
 		}
 		
-		int phoneNumber = INVALID_INPUT;
-		while (phoneNumber == INVALID_INPUT) {
-			System.out.print("Please enter the branch phone number you wish to insert: ");
-			phoneNumber = readInteger(true);
-		}
+//		int phoneNumber = INVALID_INPUT;
+//		while (phoneNumber == INVALID_INPUT) {
+//			System.out.print("Please enter the branch phone number you wish to insert: ");
+//			phoneNumber = readInteger(true);
+//		}
 		
-		BranchModel model = new BranchModel(address,
-											city,
-											id,
-											name,
-											phoneNumber);
+		Job model = new Job(jobNo, companyName, jobTitle, description);
 		delegate.insertBranch(model);
 	}
 	
