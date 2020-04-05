@@ -47,7 +47,7 @@ public class DatabaseConnectionHandler {
 
 			if (rs.next()) {
 				Applicant model = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"),
-						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getInt("DateOfBirth"));
+						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getInt("YearOfBirth"));
 				result.add(model);
 			}
 
@@ -67,6 +67,8 @@ public class DatabaseConnectionHandler {
 				ps3.executeUpdate();
 				ps4.executeUpdate();
 			}
+
+			connection.commit();
 
 			// Close connections
 			rs.close();
