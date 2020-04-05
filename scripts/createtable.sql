@@ -59,7 +59,7 @@ CREATE TABLE Requirement4
 CREATE TABLE Applicant1
 (FirstName		CHAR(20),
  Address		    CHAR(30),
- DateOfBirth		DATE,
+ YearOfBirth		INTEGER,
  PRIMARY KEY 	(FirstName, Address));
 
 CREATE TABLE Applicant3
@@ -201,19 +201,19 @@ INSERT INTO Requirement4
 VALUES ('Richmond BC', 'Excel, Word, Powerpoint, Outlook', 1004, 'UGO', 1);
 
 INSERT INTO Applicant1
-VALUES ('John', '3909 Harper Street', to_date('1989-07-26','yyyy-mm-dd'));
+VALUES ('John', '3909 Harper Street', 1989);
 
 INSERT INTO Applicant1
-VALUES ('Christopher', '2359 Red Hawk Road', to_date('1955-08-29','yyyy-mm-dd'));
+VALUES ('Christopher', '2359 Red Hawk Road', 1955);
 
 INSERT INTO Applicant1
-VALUES ('Nick', '3061 Park Street', to_date('1978-01-10','yyyy-mm-dd'));
+VALUES ('Nick', '3061 Park Street', 1978);
 
 INSERT INTO Applicant1
-VALUES ('Peter', '2403 Myra Street', to_date('1991-05-23','yyyy-mm-dd'));
+VALUES ('Peter', '2403 Myra Street', 1991);
 
 INSERT INTO Applicant1
-VALUES ('Ivan', '492 Farm Meadow Drive', to_date('1968-11-06','yyyy-mm-dd'));
+VALUES ('Ivan', '492 Farm Meadow Drive', 1968);
 
 INSERT INTO Applicant3
 VALUES ('John', 'Smith', '3909 Harper Street');
