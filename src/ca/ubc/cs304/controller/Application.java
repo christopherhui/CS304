@@ -4,6 +4,7 @@ import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.delegates.LoginWindowDelegate;
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
 import ca.ubc.cs304.model.Applicant;
+import ca.ubc.cs304.model.BranchModel;
 import ca.ubc.cs304.ui.LoginWindow;
 import ca.ubc.cs304.ui.TerminalTransactions;
 
@@ -71,8 +72,13 @@ public class Application implements LoginWindowDelegate, TerminalTransactionsDel
     public void deleteBranch(int branchId) {
     	dbHandler.deleteBranch(branchId);
     }
-    
-    /**
+
+	@Override
+	public void insertBranch(BranchModel model) {
+
+	}
+
+	/**
 	 * TermainalTransactionsDelegate Implementation
 	 * 
 	 * Update the branch name for a specific ID
