@@ -81,8 +81,43 @@ public class DatabaseConnectionHandler {
 	}
 
 	// Insert query
-	public void insertApplicant(Applicant applicant) {
+	public String insertApplicant(Applicant applicant) {
 		try {
+			PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM DEGREE WHERE MAJOR = ? AND PROGRAMYEAR = ?");
+			ps2.setString(1, applicant.getMajor());
+			ps2.setInt(2, applicant.getYear());
+			ResultSet rs = ps2.executeQuery();
+
+			if (rs.next()) {
+				// Do nothing
+			}
+			else {
+				PreparedStatement ps5 = connection.prepareStatement("INSERT INTO DEGREE VALUES (?,?,?)");
+				ps5.setInt(1, applicant.getYear());
+				ps5.setString(2,applicant.getMajor());
+				ps5.setNull(3, java.sql.Types.CHAR);
+				ps5.executeUpdate();
+				connection.commit();
+			}
+
+			PreparedStatement ps1 = connection.prepareStatement("INSERT INTO APPLICANT1 VALUES (?,?,?)");
+			ps1.setString(1, applicant.getFirstName());
+			ps1.setString(2, applicant.getAddress());
+			if (applicant.getDoe() == -1) {
+				ps1.setNull(3, Types.INTEGER);
+			} else {
+				ps1.setInt(3, applicant.getDoe());
+			}
+
+			ps1.executeUpdate();
+
+			PreparedStatement ps3 = connection.prepareStatement("INSERT INTO APPLICANT3 VALUES (?,?,?)");
+			ps3.setString(1, applicant.getFirstName());
+			ps3.setString(2, applicant.getLastName());
+			ps3.setString(3, applicant.getAddress());
+
+			ps3.executeUpdate();
+
 			PreparedStatement ps4 = connection.prepareStatement("INSERT INTO APPLICANT4 VALUES (?,?,?,?,?,?)");
 			ps4.setInt(1, applicant.getSin());
 			ps4.setInt(2, applicant.getYear());
@@ -94,32 +129,13 @@ public class DatabaseConnectionHandler {
 			ps4.executeUpdate();
 			connection.commit();
 
-			PreparedStatement ps1 = connection.prepareStatement("INSERT INTO APPLICANT1 VALUES (?,?,?)");
-			ps1.setString(1, applicant.getFirstName());
-			ps1.setString(2, applicant.getAddress());
-			if (applicant.getDoe() == -1) {
-				ps1.setNull(3, Types.DATE);
-			} else {
-				ps1.setInt(3, applicant.getDoe());
-			}
-
-			ps1.executeUpdate();
-			connection.commit();
-
-			PreparedStatement ps3 = connection.prepareStatement("INSERT INTO APPLICANT3 VALUES (?,?,?)");
-			ps3.setString(1, applicant.getFirstName());
-			ps3.setString(2, applicant.getLastName());
-			ps3.setString(3, applicant.getAddress());
-
-			ps3.executeUpdate();
-			connection.commit();
-
 			ps4.close();
 			ps1.close();
 			ps3.close();
+			return "Success";
 		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 			rollbackConnection();
+			return EXCEPTION_TAG + " " + e.getMessage();
 		}
 	}
 
