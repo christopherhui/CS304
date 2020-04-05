@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PostQueries {
-    private DatabaseConnectionHandler databaseConnectionHandler = new DatabaseConnectionHandler();
+    private DatabaseConnectionHandler databaseConnectionHandler = DCHSingleton.getDatabaseConnectionHandler();
 
     @PostMapping("/applicant/create/{sin}/{year}/{major}/{fname}/{lname}/{address}")
     String newApplicant(@PathVariable int sin, @PathVariable int year, @PathVariable String major,
