@@ -162,7 +162,7 @@ public class TerminalTransactions {
 		}
 		
 		Applicant model = new Applicant(sin, year, major, firstName, lastName, address, doe);
-		delegate.insertBranch(model);
+//		delegate.insertBranch(model);
 	}
 	
 	private void handleQuitOption() {

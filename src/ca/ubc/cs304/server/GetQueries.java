@@ -18,18 +18,33 @@ public class GetQueries {
         return databaseConnectionHandler.getCompanyHiringInfo(first, second);
     }
 
-    @GetMapping("/company-select/{filter}")
+    @GetMapping("/company/description/{filter}")
     public List<Job> companySelect(@PathVariable String filter) {
         return databaseConnectionHandler.getCompanyMatchingDescription(filter);
     }
 
-    @GetMapping("/applicant-select/{cname}")
-    public List<Applicant> applicantSelect(@PathVariable String cname) {
+    @GetMapping("/applicant/{cname}")
+    public List<Pair<Applicant, ApplicationThroughFor>> applicantSelect(@PathVariable String cname) {
         List<Pair<Applicant, ApplicationThroughFor>> res = databaseConnectionHandler.findAllApplicants(cname);
-        List<Applicant> apps = new ArrayList<>();
-        for (Pair<Applicant, ApplicationThroughFor> p : res) {
-            apps.add(p.getFirst());
-        }
-        return apps;
+//        List<Applicant> apps = new ArrayList<>();
+//        for (Pair<Applicant, ApplicationThroughFor> p : res) {
+//            apps.add(p.getFirst());
+//        }
+        return res;
+    }
+
+    @GetMapping("/applications/count/{sin}")
+    public int noApps(@PathVariable Integer sin) {
+        return databaseConnectionHandler.findNoApps(sin);
+    }
+
+    @GetMapping("/company/advanced")
+    public List<Company> companyHireInternGreater() {
+        return databaseConnectionHandler.findHireAvgTermsWorked();
+    }
+
+    @GetMapping("/applicant/all-submit")
+    public List<Applicant> appliedToAll() {
+        return databaseConnectionHandler.appliedToAll();
     }
 }

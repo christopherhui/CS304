@@ -222,7 +222,7 @@ public class DatabaseConnectionHandler {
 				Applicant applicant = new Applicant(-1, rs.getInt("ProgramYear"), rs.getString("Major"),
 						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getInt("doe"));
 				ApplicationThroughFor applicationThroughFor = new ApplicationThroughFor(rs.getInt("SIN"), Company_Name,
-						rs.getString("App_ID"), rs.getString("Platform_Name"), rs.getString("Documents"), rs.getString("Status"));
+						rs.getString("App_ID"), rs.getString("Platform_Name"));
 				result.add(new Pair<>(applicant, applicationThroughFor));
 			}
 
@@ -239,7 +239,7 @@ public class DatabaseConnectionHandler {
 	public int findNoApps(int SIN) {
 		int result = -1;
 		try {
-			PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) AS total FROM APPLICANT4 a4 " +
+			PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) AS total FROM APPLICATION_THROUGH_FOR a4 " +
 					"WHERE SIN = ?");
 			ps.setInt(1, SIN);
 			ResultSet rs = ps.executeQuery();
@@ -257,8 +257,9 @@ public class DatabaseConnectionHandler {
 		return result;
 	}
 
-	// Nested Aggregation with Group-By - Returns the companies that hire interns that have completed above 1 work terms, on average.
-	// We also want companies that have at least hired at least 2 interns.
+	// Nested Aggregation with Group-By - Returns the companies in which interns who apply there on average have completed
+	// more than 1.5 terms.
+	// We also want companies that have been applied to by at least 2 interns
 	public List<Company> findHireAvgTermsWorked() {
 		List<Company> result = new ArrayList<>();
 		try {
@@ -287,7 +288,7 @@ public class DatabaseConnectionHandler {
 	public List<Applicant> appliedToAll() {
 		List<Applicant> result = new ArrayList<>();
 		try {
-			PreparedStatement ps = connection.prepareStatement("SELECT a4.SIN, PROGRAMYEAR, MAJOR, FIRSTNAME, LASTNAME, ADDRESS FROM " +
+			PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT a4.SIN, PROGRAMYEAR, MAJOR, FIRSTNAME, LASTNAME, ADDRESS FROM " +
 					"APPLICATION_THROUGH_FOR atf, APPLICANT4 a4 " +
 					"WHERE atf.SIN = a4.SIN AND NOT EXISTS " +
 					"(SELECT COMPANY_NAME FROM COMPANY MINUS " +
@@ -296,7 +297,7 @@ public class DatabaseConnectionHandler {
 
 			while(rs.next()) {
 				Applicant applicant = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"), rs.getString("Major"),
-						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getInt("doe"));
+						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), -1);
 				result.add(applicant);
 			}
 
