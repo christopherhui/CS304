@@ -57,25 +57,26 @@ CREATE TABLE Requirement4
  UNIQUE 	(Job_Number, Company_Name));
 
 CREATE TABLE Applicant1
-(FirstName		CHAR(20),
- Address		    CHAR (30),
- DateOfBirth		DATE,
- PRIMARY KEY 	(FirstName, Address));
+    (FirstName		CHAR(20),
+    Address		    CHAR(30),
+    DateOfBirth		NUMBER,
+    PRIMARY KEY 	(FirstName, Address));
 
 CREATE TABLE Applicant3
-(FirstName	CHAR(20),
- LastName	CHAR(20),
- Address	CHAR(30),
- PRIMARY KEY (FirstName, LastName));
+    (FirstName	CHAR(20),
+    LastName	CHAR(20),
+    Address	    CHAR(30),
+    PRIMARY KEY (FirstName, LastName));
 
 CREATE TABLE Applicant4
-(SIN		INTEGER,
- ProgramYear	INTEGER NOT NULL,
- Major		CHAR(20) NOT NULL,
- FirstName	CHAR(20) NOT NULL,
- Address	CHAR(30) NOT NULL,
- PRIMARY KEY (SIN),
- FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
+    (SIN		INTEGER,
+     ProgramYear	INTEGER,
+     Major		CHAR(20),
+     FirstName	CHAR(20),
+     LastName    CHAR(20),
+     Address	CHAR(30),
+     PRIMARY KEY (SIN),
+     FOREIGN KEY (ProgramYear, Major) REFERENCES Degree ON DELETE CASCADE);
 
 CREATE TABLE Intern
 (SIN			INTEGER,

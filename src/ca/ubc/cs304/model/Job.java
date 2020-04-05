@@ -10,13 +10,13 @@ public class Job {
 
     public Job(int jobNo, String companyName, String jobTitle, String description) {
         this.jobNo = jobNo;
-        this.companyName = Company.getName();
+        this.companyName = companyName;
         this.jobTitle = jobTitle;
         this.description = description;
     }
 
-    public static int getJobNo(){
-        return Integer.parseInt(null);
+    public int getJobNo(){
+        return jobNo;
     }
 
     public String getJobTitle(){
