@@ -143,12 +143,14 @@ public class DatabaseConnectionHandler {
 	}
 
 	// Projection query, returns all company names that are hiring in sorted order
-	public List<Company> getCompanyHiringInfo() {
+	public List<Company> getCompanyHiringInfo(CompEnum filterFirst, CompEnum filterSecond) {
 		List<Company> result = new ArrayList<>();
 		
 		try {
-			Statement stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT DISTINCT COMPANY_NAME FROM COMPANY ORDER BY COMPANY_NAME DESC");
+			PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT ?, ? FROM COMPANY");
+            ps.setString(1, String.valueOf(filterFirst));
+            ps.setString(2, String.valueOf(filterSecond));
+            ResultSet rs = ps.executeQuery();
 
 //    		// get info on ResultSet
 //    		ResultSetMetaData rsmd = rs.getMetaData();
@@ -167,7 +169,7 @@ public class DatabaseConnectionHandler {
 			}
 
 			rs.close();
-			stmt.close();
+			ps.close();
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}	
