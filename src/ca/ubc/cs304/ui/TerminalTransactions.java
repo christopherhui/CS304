@@ -155,9 +155,9 @@ public class TerminalTransactions {
 			address = readLine().trim();
 		}
 		
-		int doe = INVALID_INPUT;
-		while (doe == INVALID_INPUT) {
-			System.out.print("Please enter the date of birth you wish to insert: ");
+		Integer doe = null;
+		while (doe == null) {
+			System.out.print("Please enter the year of birth you wish to insert: ");
 			doe = readInteger(true);
 		}
 		
@@ -223,3 +223,4 @@ public class TerminalTransactions {
 		return result;
 	}
 }
+
