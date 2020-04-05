@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 public class GetQueries {
-    private DatabaseConnectionHandler databaseConnectionHandler = new DatabaseConnectionHandler();
+    private DatabaseConnectionHandler databaseConnectionHandler = DCHSingleton.getDatabaseConnectionHandler();
 
     @GetMapping("/company/{first}/{second}")
     public List<Company> company(@PathVariable String first, @PathVariable String second) {

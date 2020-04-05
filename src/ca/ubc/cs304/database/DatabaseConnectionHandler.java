@@ -38,14 +38,14 @@ public class DatabaseConnectionHandler {
 	}
 
 	// Delete query
-	public void deleteApplicant(int sin) {
+	public String deleteApplicant(int sin) {
 		ArrayList<Applicant> result = new ArrayList<Applicant>();
 		try {
 			PreparedStatement ps4 = connection.prepareStatement("SELECT DISTINCT * FROM APPLICANT4 a4, APPLICANT3 a3, APPLICANT1 a1 WHERE a4.SIN = ? AND a4.FIRSTNAME = a3.FIRSTNAME AND a1.ADDRESS = a4.ADDRESS");
 			ps4.setInt(1, sin);
 			ResultSet rs = ps4.executeQuery();
 
-			while(rs.next()) {
+			if (rs.next()) {
 				Applicant model = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"),
 						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getInt("DateOfBirth"));
 				result.add(model);
@@ -73,10 +73,10 @@ public class DatabaseConnectionHandler {
 			ps1.close();
 			ps3.close();
 			ps4.close();
-
+			return "Success";
 		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 			rollbackConnection();
+			return EXCEPTION_TAG + " " + e.getMessage();
 		}
 	}
 
@@ -140,11 +140,29 @@ public class DatabaseConnectionHandler {
 	}
 
 	// Update query
-	public void updateApplicantMajor(int sin, String major) {
+	public String updateApplicantMajor(int sin, String major, int year) {
 		try {
-			PreparedStatement ps = connection.prepareStatement("UPDATE APPLICANT4 SET MAJOR = ? WHERE SIN = ?");
+			PreparedStatement ps2 = connection.prepareStatement("SELECT * FROM Degree WHERE Major = ? AND ProgramYear = ?");
+			ps2.setString(1, major);
+			ps2.setInt(2, year);
+			ResultSet rs = ps2.executeQuery();
+
+			if (rs.next()) {
+				// Do nothing
+			}
+			else {
+				PreparedStatement ps5 = connection.prepareStatement("INSERT INTO DEGREE VALUES (?,?,?)");
+				ps5.setInt(1, year);
+				ps5.setString(2, major);
+				ps5.setNull(3, java.sql.Types.CHAR);
+				ps5.executeUpdate();
+				connection.commit();
+			}
+
+			PreparedStatement ps = connection.prepareStatement("UPDATE APPLICANT4 SET MAJOR = ?, PROGRAMYEAR = ? WHERE SIN = ?");
 			ps.setString(1, major);
-			ps.setInt(2, sin);
+			ps.setInt(2, year);
+			ps.setInt(3, sin);
 
 			int rowCount = ps.executeUpdate();
 			if (rowCount == 0) {
@@ -153,9 +171,10 @@ public class DatabaseConnectionHandler {
 
 			connection.commit();
 			ps.close();
+			return "Success";
 		} catch (SQLException e) {
-			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 			rollbackConnection();
+			return EXCEPTION_TAG + " " + e.getMessage();
 		}
 	}
 
