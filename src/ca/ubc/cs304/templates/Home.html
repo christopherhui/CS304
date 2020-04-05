@@ -5,44 +5,52 @@
     <title>Job Application Tool</title>
 </head>
 <body style="background-color: white;">
-<p>
-    <label> SIN </label> <input id = "sinField" class = "SIN">
-    <label> Year </label> <input id = "yearField" class = "Year">
-    <label> Major </label> <input id = "majorField" class = "Major">
-    <label> First Name </label> <input id = "fnfield" class = "fn">
-    <label> Last Name </label> <input id = "lnfield" class = "ln">
-    <label> Address </label> <input id = "addressfield" class = "address">
-</p>
-
 
 <div class="row">
-    <div class="column">
-        <button id = "add" class = "addButton"> Add New Application </button>
-    </div>
-
-    <!-- successfully added -->
-
-
     <p>
-       <!-- fields -->
+        <label> SIN </label> <input id = "sinField" class = "SIN">
+        <label> Year </label> <input id = "yearField" class = "Year">
+        <label> Major </label> <input id = "majorField" class = "Major">
+        <label> First Name </label> <input id = "fnfield" class = "fn">
+        <label> Last Name </label> <input id = "lnfield" class = "ln">
+        <label> Address </label> <input id = "addressfield" class = "address">
     </p>
     <div class="column">
-        <button id = "delete"> Withdraw Application </button>
-    </div>
-    <button id = "update"> Update Existing Application </button>
+        <button id = "add" class = "addButton"> Add New Application </button>
 
-    <div class="column">
-        <button id = "project"> Search </button>
-        <button id = "select"> Hiring Companies </button>
-        <!-- Join Query -->
-        <button id = "join"> Search Applicants </button>
-    </div>
-    <div class="column">
-        <!-- Aggregation Query, Finds the number of applications an applicant has sent -->
-        <button id = "aggregation"> Search Applications </button>
-        <!-- Nested Aggregation -->
+    <p>
+        <label> SIN </label> <input id = "deleteSinField" class = "DeleteSIN">
+    </p>
+        <button id = "delete"> Delete Applicant </button>
+
+    <p>
+        <label> Major </label> <input id = "major" class = "Major">
+        <label> Program Year </label> <input id = "year" class = "Year">
+    </p>
+    <button id = "update"> Update Applicant Major </button>
+
+        <p>
+            <label> Matching Keyword </label> <input id = "description" class = "Description">
+        </p>
+        <button id = "select"> Find Job </button>
+        <br>
+        <br>
+        <button id = "project"> All Companies Hiring </button>
+
+        <p>
+            <label> Applicant SIN </label> <input id = "appSIN" class = "ApplicantSIN">
+        </p>
+        <button id = "join"> Find Application </button>
+
+        <p>
+            <label> Applicant SIN </label> <input id = "sentSIN" class = "SentSIN">
+        </p>
+        <button id = "aggregation"> Number of Applications Sent </button>
+        <br>
+        <br>
         <button id = "nestedAggregation"> Companies Hiring Experienced interns </button>
-        <!-- Division Query -->
+        <br>
+        <br>
         <button id = "division"> Applicants who applied to all </button>
     </div>
 
