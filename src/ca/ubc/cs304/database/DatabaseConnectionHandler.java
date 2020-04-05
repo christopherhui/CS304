@@ -11,7 +11,7 @@ import java.util.List;
  * This class handles all database related transactions
  */
 public class DatabaseConnectionHandler {
-	private static final String ORACLE_URL = "jdbc:oracle:thin:@dbhost.students.cs.ubc.ca:1522:stu";
+	private static final String ORACLE_URL = "jdbc:oracle:thin:@localhost:1522:stu";
 	private static final String EXCEPTION_TAG = "[EXCEPTION]";
 	private static final String WARNING_TAG = "[WARNING]";
 	
@@ -22,6 +22,7 @@ public class DatabaseConnectionHandler {
 			// Load the Oracle JDBC driver
 			// Note that the path could change for new drivers
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+			login("ora_gkhui", "a39920517");
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
@@ -143,13 +144,13 @@ public class DatabaseConnectionHandler {
 	}
 
 	// Projection query, returns all company names that are hiring in sorted order
-	public List<Company> getCompanyHiringInfo(CompEnum filterFirst, CompEnum filterSecond) {
+	public List<Company> getCompanyHiringInfo(String filterFirst, String filterSecond) {
 		List<Company> result = new ArrayList<>();
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT ?, ? FROM COMPANY");
-            ps.setString(1, String.valueOf(filterFirst));
-            ps.setString(2, String.valueOf(filterSecond));
+            ps.setString(1, filterFirst);
+            ps.setString(2, filterSecond);
             ResultSet rs = ps.executeQuery();
 
 //    		// get info on ResultSet

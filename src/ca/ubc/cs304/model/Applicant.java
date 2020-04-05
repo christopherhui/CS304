@@ -14,8 +14,8 @@ public class Applicant {
     public Applicant(int sin, int year, String major, String firstName, String lastName, String address, int doe) {
         this.sin = sin;
         this.doe = doe;
-        this.year = Degree.getYear();
-        this.major = Degree.getMajor();
+        this.year = year;
+        this.major = major;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
