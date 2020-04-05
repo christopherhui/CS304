@@ -8,11 +8,13 @@ public class ApplicationThroughFor {
     private String Documents;
     private String Status;
 
-    public ApplicationThroughFor(int SIN, String Company_Name, String App_ID, String platform_Name) {
+    public ApplicationThroughFor(int SIN, String Company_Name, String App_ID, String platform_Name, String Documents, String Status) {
         this.SIN = SIN;
         this.Company_Name = Company_Name;
         this.App_ID = App_ID;
         this.Platform_Name = platform_Name;
+        this.Documents = Documents;
+        this.Status = Status;
     }
 
     public int getSIN() {
@@ -29,5 +31,13 @@ public class ApplicationThroughFor {
 
     public String getPlatform_Name() {
         return Platform_Name;
+    }
+
+    public String getDocuments() {
+        return Documents;
+    }
+
+    public String getStatus() {
+        return Status;
     }
 }
