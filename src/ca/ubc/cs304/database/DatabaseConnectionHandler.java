@@ -1,6 +1,5 @@
 package ca.ubc.cs304.database;
 
-import ca.ubc.cs304.controller.Application;
 import ca.ubc.cs304.model.*;
 
 import java.sql.*;
@@ -11,12 +10,12 @@ import java.util.List;
  * This class handles all database related transactions
  */
 public class DatabaseConnectionHandler {
-	private static final String ORACLE_URL = "jdbc:oracle:thin:@dbhost.students.cs.ubc.ca:1522:stu";
+	private static final String ORACLE_URL = "jdbc:oracle:thin:@localhost:1522:stu";
 	private static final String EXCEPTION_TAG = "[EXCEPTION]";
 	private static final String WARNING_TAG = "[WARNING]";
-	
+
 	private Connection connection = null;
-	
+
 	public DatabaseConnectionHandler() {
 		try {
 			// Load the Oracle JDBC driver
@@ -26,7 +25,7 @@ public class DatabaseConnectionHandler {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
 	}
-	
+
 	public void close() {
 		try {
 			if (connection != null) {
@@ -88,7 +87,8 @@ public class DatabaseConnectionHandler {
 			ps4.setInt(2, applicant.getYear());
 			ps4.setString(3, applicant.getMajor());
 			ps4.setString(4, applicant.getFirstName());
-			ps4.setString(5, applicant.getAddress());
+			ps4.setString(5, applicant.getLastName());
+			ps4.setString(6, applicant.getAddress());
 
 			ps4.executeUpdate();
 			connection.commit();
@@ -97,10 +97,10 @@ public class DatabaseConnectionHandler {
 			ps1.setString(1, applicant.getFirstName());
 			ps1.setString(2, applicant.getAddress());
 			if (applicant.getDoe() == -1) {
-			    ps1.setNull(3, Types.INTEGER);
-            } else {
-			    ps1.setInt(3, applicant.getDoe());
-            }
+				ps1.setNull(3, Types.DATE);
+			} else {
+				ps1.setInt(3, applicant.getDoe());
+			}
 
 			ps1.executeUpdate();
 			connection.commit();
@@ -114,7 +114,7 @@ public class DatabaseConnectionHandler {
 			connection.commit();
 
 			ps4.close();
-            ps1.close();
+			ps1.close();
 			ps3.close();
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
@@ -145,12 +145,12 @@ public class DatabaseConnectionHandler {
 	// Projection query, returns all company names that are hiring in sorted order
 	public List<Company> getCompanyHiringInfo(CompEnum filterFirst, CompEnum filterSecond) {
 		List<Company> result = new ArrayList<>();
-		
+
 		try {
 			PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT ?, ? FROM COMPANY");
-            ps.setString(1, String.valueOf(filterFirst));
-            ps.setString(2, String.valueOf(filterSecond));
-            ResultSet rs = ps.executeQuery();
+			ps.setString(1, String.valueOf(filterFirst));
+			ps.setString(2, String.valueOf(filterSecond));
+			ResultSet rs = ps.executeQuery();
 
 //    		// get info on ResultSet
 //    		ResultSetMetaData rsmd = rs.getMetaData();
@@ -162,7 +162,7 @@ public class DatabaseConnectionHandler {
 //    			// get column name and print it
 //    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
 //    		}
-			
+
 			while(rs.next()) {
 				Company comp = new Company(rs.getString("Company_Name"), -1, null);
 				result.add(comp);
@@ -172,8 +172,8 @@ public class DatabaseConnectionHandler {
 			ps.close();
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
-		}	
-		
+		}
+
 		return result;
 	}
 
@@ -219,9 +219,9 @@ public class DatabaseConnectionHandler {
 
 			while(rs.next()) {
 				Applicant applicant = new Applicant(-1, rs.getInt("ProgramYear"), rs.getString("Major"),
-						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), -1);
+						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getInt("doe"));
 				ApplicationThroughFor applicationThroughFor = new ApplicationThroughFor(rs.getInt("SIN"), Company_Name,
-						rs.getString("App_ID"), rs.getString("Platform_Name"));
+						rs.getString("App_ID"), rs.getString("Platform_Name"), rs.getString("Documents"), rs.getString("Status"));
 				result.add(new Pair<>(applicant, applicationThroughFor));
 			}
 
@@ -295,7 +295,7 @@ public class DatabaseConnectionHandler {
 
 			while(rs.next()) {
 				Applicant applicant = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"), rs.getString("Major"),
-						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), -1);
+						rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getInt("doe"));
 				result.add(applicant);
 			}
 
@@ -307,16 +307,16 @@ public class DatabaseConnectionHandler {
 		}
 		return result;
 	}
-	
+
 	public boolean login(String username, String password) {
 		try {
 			if (connection != null) {
 				connection.close();
 			}
-	
+
 			connection = DriverManager.getConnection(ORACLE_URL, username, password);
 			connection.setAutoCommit(false);
-	
+
 			System.out.println("\nConnected to Oracle!");
 			return true;
 		} catch (SQLException e) {
@@ -327,9 +327,18 @@ public class DatabaseConnectionHandler {
 
 	private void rollbackConnection() {
 		try  {
-			connection.rollback();	
+			connection.rollback();
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
+	}
+
+	public void insertBranch(Job model) {
+	}
+
+	public void deleteBranch(int branchId) {
+	}
+
+	public void updateBranch(int branchId, String name) {
 	}
 }
