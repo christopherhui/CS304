@@ -3,7 +3,7 @@
       xmlns:background-color="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Job Application Tool</title>
+    <title>Companies</title>
 </head>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -17,58 +17,25 @@
 </nav>
 
 <div class="jumbotron jumbotron-fluid">
-    <h1 class="display-4">Jobs-4-Me</h1>
-    <p class="lead">Query and access information about jobs</p>
+    <h1 class="display-4">Companies & Applicants</h1>
+    <p class="lead">Who is hiring?</p>
 </div>
 
 <div class="container">
-    <h2>Create your account here!</h2>
+    <h2>Search for companies!</h2>
     <div class="row">
         <div class="col-auto mr-auto" >
-            <label>Sin</label>
+            <label>Search by Name</label>
+            <!-- change input id -->
             <input id = "sinField">
         </div>
-        <div class="col-auto mr-auto">
-            <label>Major</label>
-            <input id = "majorField">
-        </div>
-        <div class="col-auto mr-auto">
-            <label>Year</label>
-            <input id = "yearField">
-        </div>
-        <div class="col-auto mr-auto">
-            <label>First Name</label>
-            <input id = "fnField">
-        </div>
-        <div class="col-auto mr-auto">
-            <label>Last Name</label>
-            <input id = "lnField">
-        </div>
-        <div class="col-auto mr-auto">
-            <label>Address</label>
-            <input id = "addressField">
-        </div>
-    </div>
-
-    <p></p>
-
-    <div class="row">
-        <div class="col-auto mr-auto">
-            <button class="btn btn-success btn-sm" id = "addButton"> Add New Application </button>
-        </div>
-        <div class="col-auto mr-auto">
-            <button class="btn btn-danger btn-sm" id = "delete"> Withdraw Application </button>
-        </div>
-        <div class="col-auto mr-auto">
-            <button class="btn btn-info btn-sm" id = "update"> Update Existing Application </button>
+        <div class="col">
+            <button class="btn btn-primary btn-sm" id = "project"> Search </button>
         </div>
     </div>
 
     <h2>Find information about Companies and Applicants</h2>
     <div class="row">
-        <div class="col-auto mr-auto">
-            <button class="btn btn-primary btn-sm" id = "project"> Search </button>
-        </div>
         <div class="col-auto mr-auto">
             <button class="btn btn-secondary btn-sm" id = "select"> Hiring Companies </button>
         </div>
