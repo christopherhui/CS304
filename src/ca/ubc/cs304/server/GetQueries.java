@@ -33,6 +33,11 @@ public class GetQueries {
         return res;
     }
 
+    @GetMapping("/applicant/name/{major}")
+    public List<Applicant> allApplicants(@PathVariable String major) {
+        return databaseConnectionHandler.getAllApplicants(major);
+    }
+
     @GetMapping("/applications/count/{sin}")
     public int noApps(@PathVariable Integer sin) {
         return databaseConnectionHandler.findNoApps(sin);
