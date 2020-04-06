@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc"
+      xmlns:background-color="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Companies</title>
+</head>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" th:src="@{js/home.js}"></script>
+
+<body style="background-color: white;">
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">Jobs-4-Me</a>
+</nav>
+
+<div class="jumbotron jumbotron-fluid">
+    <h1 class="display-4">Companies & Applicants</h1>
+    <p class="lead">Who is hiring?</p>
+</div>
+
+<div class="container">
+    <h2>Search for companies!</h2>
+    <div class="row">
+        <div class="col-auto mr-auto" >
+            <label>Search by Name</label>
+            <!-- change input id -->
+            <input id = "sinField">
+        </div>
+        <div class="col">
+            <button class="btn btn-primary btn-sm" id = "project"> Search </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto mr-auto" >
+            <label>Search by Applicants</label>
+            <!-- change input id -->
+            <input id = "sinField">
+        </div>
+        <div class="col">
+            <!-- Join Query -->
+            <button class="btn btn-primary btn-sm" id = "join"> Search Applicants </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto mr-auto" >
+            <label>Search by Applications</label>
+            <!-- change input id -->
+            <input id = "__">
+        </div>
+        <div class="col">
+            <!-- Aggregation Query, Finds the number of applications an applicant has sent -->
+            <button class="btn btn-primary btn-sm" id = "aggregation"> Search Applications </button>
+        </div>
+    </div>
+
+
+    <h2>Find information about Companies and Applicants</h2>
+    <div class="row">
+        <div class="col-auto mr-auto">
+            <button class="btn btn-secondary btn-sm" id = "select"> Hiring Companies </button>
+        </div>
+
+        <div class="col-auto mr-auto">
+            <!-- Nested Aggregation -->
+            <button class="btn btn-primary btn-sm" id = "nestedAggregation"> Companies Hiring Experienced interns </button>
+        </div>
+        <div class="col-auto mr-auto">
+            <!-- Division Query -->
+            <button class="btn btn-secondary btn-sm" id = "division"> Applicants who applied to all </button>
+        </div>
+    </div>
+</div>
+
+<table id="table_id" class="display">
+    <thead>
+    <tr>
+        <!--        <th>col-auto mr-auto 1</th>-->
+        <!--        <th>col-auto mr-auto 2</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <!--        <td>Row 1 Data 1</td>-->
+        <!--        <td>Row 1 Data 2</td>-->
+    </tr>
+    <tr>
+        <!--        <td>Row 2 Data 1</td>-->
+        <!--        <td>Row 2 Data 2</td>-->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
