@@ -142,7 +142,7 @@ $(document).ready(function () {
 
     $('#select').click(() => {
         let status = 0;
-        let filter = $('#selectit');
+        let filter = $('#selectit').val();
 
         $('#exampleFormControlSelect1 > option').each(function() {
             if (this.selected) {
@@ -165,39 +165,42 @@ $(document).ready(function () {
         submit.done(function (result) {
             $('#first').empty();
             $('#second').empty();
-            if (first !== "no") {
-                $('#first').append(`<th scope=\"col\">${first}</th>`);
-            }
-            if (second !== "no") {
-                $('#first').append(`<th scope=\"col\">${second}</th>`);
-            }
-            if (third !== "no") {
-                $('#first').append(`<th scope=\"col\">${third}</th>`);
-            }
+            $('#first').append(`<th scope=\"col\">Job Number</th>`);
+            $('#first').append(`<th scope=\"col\">Company Name</th>`);
+            $('#first').append(`<th scope=\"col\">Job Title</th>`);
+            $('#first').append(`<th scope=\"col\">Description</th>`);
+
             for (let i = 0; i < result.length; i++) {
                 let done = false;
                 let curr = result[i];
-                if (curr['name'] != null) {
+                if (curr['jobNo'] !== -1) {
                     if (!done) {
                         console.log('added');
                         $('#second').append(`<tr id=\"a${i}\"></tr>`);
                         done = true;
                     }
-                    $(`#a${i}`).append(`<td>${curr['name']}</td>`);
+                    $(`#a${i}`).append(`<td>${curr['jobNo']}</td>`);
                 }
-                if (curr['type'] != null) {
+                if (curr['companyName'] != null) {
                     if (!done) {
                         $('#second').append(`<tr id=\"a${i}\"></tr>`);
                         done = true;
                     }
-                    $(`#a${i}`).append(`<td>${curr['type']}</td>`);
+                    $(`#a${i}`).append(`<td>${curr['companyName']}</td>`);
                 }
-                if (curr['hiringAmt'] !== -1) {
+                if (curr['jobTitle'] != null) {
                     if (!done) {
                         $('#second').append(`<tr id=\"a${i}\"></tr>`);
                         done = true;
                     }
-                    $(`#a${i}`).append(`<td>${curr['hiringAmt']}</td>`);
+                    $(`#a${i}`).append(`<td>${curr['jobTitle']}</td>`);
+                }
+                if (curr['description'] != null) {
+                    if (!done) {
+                        $('#second').append(`<tr id=\"a${i}\"></tr>`);
+                        done = true;
+                    }
+                    $(`#a${i}`).append(`<td>${curr['description']}</td>`);
                 }
             }
         });

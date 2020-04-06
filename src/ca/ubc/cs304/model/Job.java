@@ -19,6 +19,10 @@ public class Job {
         return jobNo;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
     public String getJobTitle(){
         return jobTitle;
     }
