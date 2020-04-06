@@ -181,7 +181,7 @@ public class DatabaseConnectionHandler {
 	}
 
 	// Projection query, returns all company names that are hiring in sorted order
-	public List<Company> getCompanyHiringInfo(String filterFirst, String filterSecond) {
+	public List<Company> getCompanyHiringInfo(String filterFirst, String filterSecond, String filterThird) {
 		List<Company> result = new ArrayList<>();
 
 		try {
@@ -202,6 +202,15 @@ public class DatabaseConnectionHandler {
 				start |= 2;
 			}
 			if (filterSecond.equals("HIRINGAMT")) {
+				start |= 4;
+			}
+			if (filterThird.equals("COMPANY_NAME")) {
+				start |= 1;
+			}
+			if (filterThird.equals("TYPE")) {
+				start |= 2;
+			}
+			if (filterThird.equals("HIRINGAMT")) {
 				start |= 4;
 			}
 			if (start == 1) {
@@ -315,8 +324,8 @@ public class DatabaseConnectionHandler {
 				ps.close();
 			}
 			if (status == 1) {
-				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM JOB WHERE COMPANY_NAME = ?");
-				ps.setString(1, filter);
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM JOB WHERE COMPANY_NAME LIKE ?");
+				ps.setString(1,"%" + filter + "%");
 				ResultSet rs = ps.executeQuery();
 
 				while(rs.next()) {

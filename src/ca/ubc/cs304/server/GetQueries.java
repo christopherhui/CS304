@@ -13,14 +13,14 @@ import java.util.List;
 public class GetQueries {
     private DatabaseConnectionHandler databaseConnectionHandler = DCHSingleton.getDatabaseConnectionHandler();
 
-    @GetMapping("/company/{first}/{second}")
-    public List<Company> company(@PathVariable String first, @PathVariable String second) {
-        return databaseConnectionHandler.getCompanyHiringInfo(first, second);
+    @GetMapping("/company/{first}/{second}/{third}")
+    public List<Company> company(@PathVariable String first, @PathVariable String second, @PathVariable String third) {
+        return databaseConnectionHandler.getCompanyHiringInfo(first, second, third);
     }
 
     @GetMapping("/company/description/{filter}/{type}")
-    public List<Job> companySelect(@PathVariable String filter, @PathVariable int status) {
-        return databaseConnectionHandler.getCompanyMatchingDescription(filter, status);
+    public List<Job> companySelect(@PathVariable String filter, @PathVariable String type) {
+        return databaseConnectionHandler.getCompanyMatchingDescription(filter, Integer.parseInt(type));
     }
 
     @GetMapping("/applicant/{cname}")
