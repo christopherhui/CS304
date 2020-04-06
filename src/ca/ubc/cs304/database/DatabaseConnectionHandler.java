@@ -248,22 +248,52 @@ public class DatabaseConnectionHandler {
 	}
 
 	// Selection query, finds all companies and jobs that match keywords in a description
-	public List<Job> getCompanyMatchingDescription(String filter) {
+	public List<Job> getCompanyMatchingDescription(String filter, int status) {
 		List<Job> result = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM JOB WHERE DESCRIPTION LIKE ?");
-			ps.setString(1, "%" + filter + "%");
-			ResultSet rs = ps.executeQuery();
+			if (status == 0) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM JOB WHERE DESCRIPTION LIKE ?");
+				ps.setString(1, "%" + filter + "%");
+				ResultSet rs = ps.executeQuery();
 
-			while(rs.next()) {
-				Job job = new Job(rs.getInt("Job_Number"), rs.getString("Company_Name"),
-						rs.getString("Job_Title"), rs.getString("Description"));
-				result.add(job);
+				while(rs.next()) {
+					Job job = new Job(rs.getInt("Job_Number"), rs.getString("Company_Name"),
+							rs.getString("Job_Title"), rs.getString("Description"));
+					result.add(job);
+				}
+
+				rs.close();
+				ps.close();
+			}
+			if (status == 1) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM JOB WHERE COMPANY_NAME = ?");
+				ps.setString(1, filter);
+				ResultSet rs = ps.executeQuery();
+
+				while(rs.next()) {
+					Job job = new Job(rs.getInt("Job_Number"), rs.getString("Company_Name"),
+							rs.getString("Job_Title"), rs.getString("Description"));
+					result.add(job);
+				}
+
+				rs.close();
+				ps.close();
+			}
+			if (status == 2) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT * FROM JOB WHERE JOB_TITLE LIKE ?");
+				ps.setString(1, "%" + filter + "%");
+				ResultSet rs = ps.executeQuery();
+
+				while(rs.next()) {
+					Job job = new Job(rs.getInt("Job_Number"), rs.getString("Company_Name"),
+							rs.getString("Job_Title"), rs.getString("Description"));
+					result.add(job);
+				}
+				rs.close();
+				ps.close();
 			}
 
-			rs.close();
-			ps.close();
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
