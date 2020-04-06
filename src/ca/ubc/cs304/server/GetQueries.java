@@ -18,9 +18,9 @@ public class GetQueries {
         return databaseConnectionHandler.getCompanyHiringInfo(first, second);
     }
 
-    @GetMapping("/company/description/{filter}")
-    public List<Job> companySelect(@PathVariable String filter) {
-        return databaseConnectionHandler.getCompanyMatchingDescription(filter);
+    @GetMapping("/company/description/{filter}/{type}")
+    public List<Job> companySelect(@PathVariable String filter, @PathVariable int status) {
+        return databaseConnectionHandler.getCompanyMatchingDescription(filter, status);
     }
 
     @GetMapping("/applicant/{cname}")
