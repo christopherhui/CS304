@@ -204,6 +204,54 @@ public class DatabaseConnectionHandler {
 			if (filterSecond.equals("HIRINGAMT")) {
 				start |= 4;
 			}
+			if (start == 1) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT COMPANY_NAME FROM COMPANY");
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					Company comp = new Company(rs.getString("COMPANY_NAME"), -1, null);
+					result.add(comp);
+				}
+
+				rs.close();
+				ps.close();
+			}
+			if (start == 2) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT TYPE FROM COMPANY");
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					Company comp = new Company(null, -1, rs.getString("TYPE"));
+					result.add(comp);
+				}
+
+				rs.close();
+				ps.close();
+			}
+			if (start == 4) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT HIRINGAMT FROM COMPANY");
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					Company comp = new Company(null, rs.getInt("HIRINGAMT"), null);
+					result.add(comp);
+				}
+
+				rs.close();
+				ps.close();
+			}
+			if (start == 7) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT COMPANY_NAME, HIRINGAMT, TYPE FROM COMPANY");
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					Company comp = new Company(rs.getString("COMPANY_NAME"), rs.getInt("HIRINGAMT"), rs.getString("TYPE"));
+					result.add(comp);
+				}
+
+				rs.close();
+				ps.close();
+			}
 			if (start == 5) {
 				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT COMPANY_NAME, HIRINGAMT FROM COMPANY");
 				ResultSet rs = ps.executeQuery();
