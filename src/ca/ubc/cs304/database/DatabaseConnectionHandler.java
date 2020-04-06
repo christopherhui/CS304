@@ -185,29 +185,61 @@ public class DatabaseConnectionHandler {
 		List<Company> result = new ArrayList<>();
 
 		try {
-			PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT ?, ? FROM COMPANY");
-			ps.setString(1, filterFirst);
-			ps.setString(2, filterSecond);
-			ResultSet rs = ps.executeQuery();
-
-//    		// get info on ResultSet
-//    		ResultSetMetaData rsmd = rs.getMetaData();
-//
-//    		System.out.println(" ");
-//
-//    		// display column names;
-//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
-//    			// get column name and print it
-//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
-//    		}
-
-			while(rs.next()) {
-				Company comp = new Company(rs.getString("Company_Name"), -1, null);
-				result.add(comp);
+			int start = 0;
+			if (filterFirst.equals("COMPANY_NAME")) {
+				start |= 1;
 			}
+			if (filterFirst.equals("TYPE")) {
+				start |= 2;
+			}
+			if (filterFirst.equals("HIRINGAMT")) {
+				start |= 4;
+			}
+			if (filterSecond.equals("COMPANY_NAME")) {
+				start |= 1;
+			}
+			if (filterSecond.equals("TYPE")) {
+				start |= 2;
+			}
+			if (filterSecond.equals("HIRINGAMT")) {
+				start |= 4;
+			}
+			if (start == 5) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT COMPANY_NAME, HIRINGAMT FROM COMPANY");
+				ResultSet rs = ps.executeQuery();
 
-			rs.close();
-			ps.close();
+				while (rs.next()) {
+					Company comp = new Company(rs.getString("COMPANY_NAME"), rs.getInt("HIRINGAMT"), null);
+					result.add(comp);
+				}
+
+				rs.close();
+				ps.close();
+			}
+			if (start == 3) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT COMPANY_NAME, TYPE FROM COMPANY");
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					Company comp = new Company(rs.getString("Company_Name"), -1, rs.getString("Type"));
+					result.add(comp);
+				}
+
+				rs.close();
+				ps.close();
+			}
+			if (start == 6) {
+				PreparedStatement ps = connection.prepareStatement("SELECT DISTINCT HIRINGAMT, TYPE FROM COMPANY");
+				ResultSet rs = ps.executeQuery();
+
+				while (rs.next()) {
+					Company comp = new Company(null, rs.getInt("HIRINGAMT"), rs.getString("TYPE"));
+					result.add(comp);
+				}
+
+				rs.close();
+				ps.close();
+			}
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
