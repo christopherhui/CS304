@@ -21,7 +21,7 @@ public class DatabaseConnectionHandler {
 			// Load the Oracle JDBC driver
 			// Note that the path could change for new drivers
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			login("******REMOVED******", "******REMOVED******");
+			login("***REMOVED***", "***REMOVED***");
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
@@ -47,7 +47,7 @@ public class DatabaseConnectionHandler {
 
 			if (rs.next()) {
 				Applicant model = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"),
-						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), rs.getInt("YearOfBirth"));
+						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), -1);
 				result.add(model);
 			}
 
@@ -301,6 +301,27 @@ public class DatabaseConnectionHandler {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
 
+		return result;
+	}
+
+	// All applicants with a major of a specific value
+	public List<Applicant> getAllApplicants(String cname) {
+		ArrayList<Applicant> result = new ArrayList<Applicant>();
+		try {
+			PreparedStatement ps4 = connection.prepareStatement("SELECT DISTINCT * FROM APPLICANT4 a4 WHERE a4.MAJOR = ?");
+			ps4.setString(1, cname);
+			ResultSet rs = ps4.executeQuery();
+
+			while (rs.next()) {
+				Applicant model = new Applicant(rs.getInt("SIN"), rs.getInt("ProgramYear"),
+						rs.getString("Major"), rs.getString("FirstName"), rs.getString("LastName"), rs.getString("Address"), -1);
+				result.add(model);
+			}
+
+			ps4.close();
+		} catch (SQLException e) {
+			rollbackConnection();
+		}
 		return result;
 	}
 
