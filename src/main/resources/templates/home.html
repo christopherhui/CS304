@@ -12,110 +12,114 @@
 
 <body style="background-color: white;">
 
+
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">Jobs-4-Me</a>
 </nav>
 
 <div class="jumbotron jumbotron-fluid">
-    <h1 class="display-4">Jobs-4-Me</h1>
+    <h1 class="display-4" >Jobs-4-Me</h1>
     <p class="lead">Query and access information about jobs</p>
 </div>
 
 <div class="container">
-    <h2>Create your account here!</h2>
     <div class="row">
         <div class="col-auto mr-auto" >
-            <label>Sin</label>
-            <input id = "sinField">
+            <h2>Create your account here!</h2>
         </div>
-        <div class="col-auto mr-auto">
-            <label>Major</label>
-            <input id = "majorField">
-        </div>
-        <div class="col-auto mr-auto">
-            <label>Year</label>
-            <input id = "yearField">
-        </div>
-        <div class="col-auto mr-auto">
-            <label>First Name</label>
-            <input id = "fnField">
-        </div>
-        <div class="col-auto mr-auto">
-            <label>Last Name</label>
-            <input id = "lnField">
-        </div>
-        <div class="col-auto mr-auto">
-            <label>Address</label>
-            <input id = "addressField">
+        <div class="col-auto mr-auto" >
+            <h2>Delete your account here 😞</h2>
         </div>
     </div>
 
-    <p></p>
-
-    <div class="row">
-        <div class="col-auto mr-auto">
-            <button class="btn btn-success btn-sm" id = "addButton"> Add New Application </button>
-        </div>
-    </div>
-
-    <p></p>
-
-    <h2>Delete your account here 😞</h2>
     <div class="row">
         <div class="col-auto mr-auto" >
-            <label>Sin</label>
-            <input id = "sinF">
+            <label style="display: block; width: 100px;" > SIN </label><input id = "sinField">
+        </div>
+        <!-- SIN For Delete Account -->
+        <div class="col-auto mr-auto" >
+            <label style="display: block; width: 100px;" > SIN </label><input id = "sinF">
         </div>
     </div>
 
-    <p></p>
-
-    <div class="col-auto mr-auto">
-        <button class="btn btn-danger btn-sm" id = "delete"> Withdraw Application </button>
+    <div class="row">
+        <div class="col-auto mr-auto">
+            <label style="display: block; width: 100px;" >Major</label><input id = "majorField">
+        </div>
+        <div class="col-auto mr-auto">
+            <button class="btn btn-danger btn-sm" id = "delete" > Withdraw Application </button>
+        </div>
     </div>
 
-    <p></p>
+    <div class="row">
+        <div class="col-auto mr-auto">
+            <label style="display: block; width: 100px;" >Year</label><input id = "yearField"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-auto mr-auto">
+            <label style="display: block; width: 100px;" >First Name</label><input id = "fnField"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-auto mr-auto">
+            <label style="display: block; width: 100px;" >Last Name</label><input id = "lnField"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-auto mr-auto">
+            <label style="display: block; width: 100px;" >Address</label><input id = "addressField"></div>
+    </div>
+
+    <br>
+
+    <div class="row">
+        <div class="col"><button class="btn btn-success btn-sm" id = "addButton" > Add New Application </button></div>
+    </div>
+
+    <br>
 
     <h2>Update your account here</h2>
     <div class="row">
         <div class="col-auto mr-auto" >
-            <label>Sin</label>
-            <input id = "sin">
-        </div>
+            <label style="display: block; width: 100px;" > SIN </label><input id = "sin"></div>
         <div class="col-auto mr-auto">
-            <label>Major</label>
-            <input id = "major">
-        </div>
+            <label style="display: block; width: 100px;" > Major </label><input id = "major"></div>
         <div class="col-auto mr-auto">
-            <label>Year</label>
-            <input id = "year">
-        </div>
+            <label style="display: block; width: 100px;" > Year </label><input id = "year"></div>
     </div>
 
-    <div class="col-auto mr-auto">
-        <button class="btn btn-info btn-sm" id = "update"> Update Existing Application </button>
+    <br>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-info btn-sm" id = "update"> Update Existing Application </button>
+        </div>
     </div>
 
     <br>
 
     <h2>Find information about Companies and Applicants</h2>
+    <br>
     <div class="row">
         <div class="col-auto mr-auto">
             <button class="btn btn-primary btn-sm" id = "project">Search for Jobs</button>
         </div>
         <div class="col-auto mr-auto">
-            <div class="dropdown">
-                <label for="sel1">Filter jobs to select from</label>
-                <select multiple class="form-control" id="sel1">
-                    <option>Company Name</option>
-                    <option>Hiring Amount</option>
-                    <option>Type</option>
-                </select>
-            </div>
+            <button class="btn btn-secondary btn-sm" id = "select"> Hiring Companies </button>
         </div>
 
+    </div>
+
+    <div class="row">
         <div class="col-auto mr-auto">
-            <button class="btn btn-secondary btn-sm" id = "select"> Hiring Companies </button>
+            <div class="dropdown">
+                <label for="sel1">Filter jobs to select from</label><select multiple class="form-control" id="sel1">
+                <option>Company Name</option>
+                <option>Hiring Amount</option>
+                <option>Type</option>
+            </select>
+            </div>
         </div>
         <div class="col-auto mr-auto">
             <label for="exampleFormControlSelect1">Example select</label>
@@ -128,29 +132,32 @@
         </div>
     </div>
 
-    <div class="col">
-        <div class="row">
-            <table id="table_id" class="display table-striped" >
-                <thead>
-                <tr id="first">
-                    <th>col-auto mr-auto 1</th>
-                    <th>col-auto mr-auto 2</th>
-                </tr>
-                </thead>
-                <tbody id="second">
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <br>
+
+    <div class="row">
+        <table id="table_id" class="display table-striped" >
+            <thead>
+            <tr id="first">
+                <th>col-auto mr-auto 1</th>
+                <th>col-auto mr-auto 2</th>
+            </tr>
+            </thead>
+            <tbody id="second">
+            <tr>
+                <td>Row 1 Data 1</td>
+                <td>Row 1 Data 2</td>
+            </tr>
+            <tr>
+                <td>Row 2 Data 1</td>
+                <td>Row 2 Data 2</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
+<br>
+<br>
 
 </body>
 </html>
