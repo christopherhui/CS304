@@ -21,7 +21,7 @@ public class DatabaseConnectionHandler {
 			// Load the Oracle JDBC driver
 			// Note that the path could change for new drivers
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-			login("***REMOVED***", "***REMOVED***");
+			login("REMOVED", "REMOVED");
 		} catch (SQLException e) {
 			System.out.println(EXCEPTION_TAG + " " + e.getMessage());
 		}
